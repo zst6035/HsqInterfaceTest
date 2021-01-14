@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 自动重新加载 600 seconds ==10分钟 -->
+<configuration scan="true" scanPeriod="600 seconds">
+    <!-- property定义属性 然后用${属性name可以取值} -->
+    <property name="contentName" value="geteway-api"/>
+    <property name="path" value="/data/log/"/>
+    <property name="commonPattern"
+              value="%date{yyyy-MM-dd HH:mm:ss.SSS}-{%logger{26}:%line?method=%M}-%level-->%msg%n"/>
+    <property name="commonPatternBak" value=" %date[%thread] %-5level %logger{26} - %msg%n"/>
+    <property name="logFileName" value="geteway-api"/>
+    <property name="maxLogFileSize" value="100MB"/>
+    <property name="maxLogFileNum" value="180"/>
+    <!-- 元素timestamp可以定义表示一个当前日期和时间的属性。 -->
+    <timestamp key="date" datePattern="yyyy-MM-dd HH:mm:ss:SS"/>
+    <timestamp key="dateDay" datePattern="yyyyMMdd"/>
+    <property name="onlyMessagePattern" value=" %msg%n"/>
+    <!-- 输出事件源头关联的logger的logger上下文的名称-->
+    <contextName>${contentName}</contextName>
+
+    <!--将日志输出到控制台  -->
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- encoder 默认配置为PatternLayoutEncoder -->
+        <encoder>
+            <pattern>${commonPattern}</pattern>
+        </encoder>
+    </appender>
+
+    <!--
+        将日志输入到文件，每个日志文件最大100MB， 当超过100MB重新生成一个日志文件，
+        并且前一个日志文件备份并压缩,保留半年归档日志，半年前的日志自动删除
+    -->
+    <appender name="log_file"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${path}${logFileName}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${path}${logFileName}.%d{yyyy-MM-dd}.%i.log.zip
+            </fileNamePattern>
+            <!--
+    保留半年归档日志 180
+-->
+            <maxHistory>${maxLogFileNum}</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <!--
+一个文件100MB
+-->
+                <maxFileSize>${maxLogFileSize}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${commonPattern}</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="sql_log_file"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${path}${logFileName}.sql.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${path}${logFileName}.sql.%d{yyyy-MM-dd}.%i.log.zip
+            </fileNamePattern>
+            <maxHistory>${maxLogFileNum}</maxHistory>
+            <timeBasedFileNamingAndTriggeringPolicy
+                    class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+
+                <maxFileSize>${maxLogFileSize}</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>${commonPattern}</pattern>
+        </encoder>
+    </appender>
+
+
+    <!-- spring框架日志级别 -->
+    <logger name="org.springframework" level="ERROR"/>
+
+    <logger
+            name="org.springframework.jdbc.datasource.DataSourceTransactionManager"
+            level="DEBUG"/>
+
+    <!-- springMVC日志级别 -->
+    <logger name="org.springframework.web" level="ERROR"/>
+    <!-- cxf日志级别 -->
+    <logger name="org.apache.cxf" level="ERROR"/>
+    <!-- memcache日志级别 -->
+    <logger name="net.rubyeye.xmemcached" level="ERROR"/>
+    <!-- c3p0日志级别 -->
+    <logger name="com.mchange" level="INFO"/>
+    <!-- mybatis日志级别 -->
+    <logger name="org.mybais" level="DEBUG"/>
+    <!-- mybatis日志级别 -->
+    <logger name="org.apache.ibatis" level="DEBUG"/>
+    <!-- lucene日志级别 -->
+    <logger name="org.apache.lucene" level="ERROR"/>
+    <!-- 自己类的日志级别 -->
+    <logger name="com.mandao" level="INFO"/>
+    <logger name="java.sql.ResultSet" level="ERROR"/>
+    <!-- sql日志 -->
+    <logger name="java.sql" level="DEBUG">
+        <appender-ref ref="sql_log_file"/>
+    </logger>
+
+    <!-- 总日志 -->
+    <root level="INFO">
+        <appender-ref ref="stdout"/>
+        <appender-ref ref="log_file"/>
+
+    </root>
+</configuration>

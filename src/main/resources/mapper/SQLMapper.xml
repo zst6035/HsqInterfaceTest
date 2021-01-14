@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hsq">
+<select id="selMerchant" resultType="com.hsq.model.Merchant">
+    select *  from merchant ;
+</select>
+
+    <select id="selReqInfo" resultType="com.hsq.model.ReqInfo" parameterType="String">
+        select *  from ReqInfo where description=#{0}
+    </select>
+
+
+    <select id="selMerchantInfo" resultType="com.hsq.model.Merchant" >
+        select *  from merchant;
+    </select>
+
+    <update id="updateBfTrans" parameterType="String">
+        UPDATE cgwfi_scan_pay_trans set state=3 ,sell_succ_flag=1 ,succ_money='0.01' where
+        trade_no in (select trade_no  from BAOFOO_FI.fi_platform_business_order where member_transid=#{0});
+
+
+    </update>
+    <update id="updateTransBase" parameterType="String">
+         UPDATE T_TC_BASE set TRADE_STATUS='I' where TRADE_NO=#{0};
+    </update>
+    <update id="updateTransChannel" parameterType="String">
+         UPDATE T_TC_CHANNEL_TRANS set STATUS='I' where TRADE_NO=#{0};
+    </update>
+
+    <update id="updateGateway" parameterType="String">
+       UPDATE T_ACQ_AGGREGATE set ORDER_STATUS='PROCESSING' where TRANS_NO=#{0};
+    </update>
+
+    <select id="selBfTansNo" parameterType="String" resultType="String">
+     select business_no from cgwfi_scan_pay_trans
+      WHERE
+	trade_no IN (
+		SELECT
+			trade_no
+		FROM
+			BAOFOO_FI.fi_platform_business_order
+		WHERE
+			member_transid = #{0}
+	);
+    </select>
+
+    <select id="selCookie" resultType="String">
+        select cookie from testconfig;
+    </select>
+
+</mapper>
