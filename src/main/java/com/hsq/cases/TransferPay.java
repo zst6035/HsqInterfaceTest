@@ -16,34 +16,32 @@ import java.util.Map;
 public class TransferPay {
     //基础参数
     ReqInfo reqInfo;
-    EncAndDnc encAndDnc;
+    EncAndDnc encAndDnc=new EncAndDnc();
     Map map;
     String transNo="161"+TestConfig.getRandom4(10);
 
     @BeforeClass
     public void BeforePay(){
         map=new HashMap();
-        /*由接口可以知道，map的值几乎是固定的，唯一的变化就是会随着method的不同，进行变化，
-        那么对于数据库来说，只需要存储变化的内容即可，所以，再新增一张表，将method，以及signContent进行入库；
-        */
-        //这些针对所有请求都是一样的，不变化的；
+
         map.put("merchantNo", TestConfig.merchant.getMerchantNo());
-        map.put("version","1.0.0");
+        map.put("version","5.0.0");
         map.put("format","json");
         map.put("signType","CFCA");
         map.put("sign",null);
     }
 
-    @Test(description = "代付-工单银行")
+    @Test(description = "代付-工商银行")
     public void transFer(){
         reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","代付");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("requestDate", TestConfig.dateString());
         jsonObject.put("transNo",transNo);
 
-        encAndDnc=new EncAndDnc();
+
         //加密后的字符串
         String signContent= encAndDnc.encMessage(jsonObject.toString());
+        log.info("请求明文"+jsonObject.toString());
 
         reqInfo.setSignContent(signContent);
         map.put("method",reqInfo.getMethod());
@@ -55,7 +53,8 @@ public class TransferPay {
         String res=encAndDnc.dencMessage(result);
         //再将请求结果转换为json格式
         JSONObject jsonObject2= JSONObject.parseObject(res);
-        Assert.assertEquals(jsonObject2.get("resmessage"),"交易成功");
+        log.info("响应明文"+jsonObject2.toString());
+        Assert.assertEquals(jsonObject2.get("respMsg"),"交易成功");
 
         log.info("响应明文结果"+res);
 
@@ -69,7 +68,7 @@ public class TransferPay {
         jsonObject.put("requestDate", TestConfig.dateString());
         jsonObject.put("transNo",transNo);
 
-        encAndDnc=new EncAndDnc();
+
         //加密后的字符串
         String signContent= encAndDnc.encMessage(jsonObject.toString());
 

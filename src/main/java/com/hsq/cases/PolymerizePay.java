@@ -87,9 +87,13 @@ public class PolymerizePay {
             //修改宝付订单号；
            int i1= DatabaseUtil.getSqlSessionBf().update("updateBfTrans",channelOrderNo);
             //修改慧收钱订单号；
+            log.info("宝付修改数据"+i1);
             int i2=   DatabaseUtil.getSqlSessionHsqTrader().update("updateTransBase",tradeNo);
+            log.info("交易修改数据1"+i2);
             int i3=  DatabaseUtil.getSqlSessionHsqTrader().update("updateTransChannel",tradeNo);
+            log.info("交易修改数据2"+i3);
             int i4= DatabaseUtil.getSqlSessionHsqGateway().update("updateGateway",transNo);
+            log.info("gateway修改数据"+i4);
             int sum=i1+i2+i3+i4;
             Assert.assertEquals(sum,4);
         } catch (IOException e) {
@@ -102,14 +106,17 @@ public class PolymerizePay {
     @Test(description = "宝付订单查询通知商户",dependsOnGroups = "alipay")
     public void selBfTrans()throws Exception{
         String businessNo=DatabaseUtil.getSqlSessionBf().selectOne("selBfTansNo",channelOrderNo);
+        log.info("businessNO："+businessNo);
         String cookie=DatabaseUtil.getSqlSession1().selectOne("selCookie");
       JSONObject jsonObject=  TestConfig.selTrans(cookie,businessNo);
         Assert.assertEquals(jsonObject.get("errorMsg"),"成功查询1条订单信息:");
+        log.info("通知商户成功");
 
     }
 
 
 
+   // @Test(description = "聚合分账",dependsOnMethods = "selBfTrans")
     @Test(description = "聚合分账")
     public void payShare(){
         reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","聚合分账");
@@ -120,7 +127,7 @@ public class PolymerizePay {
         log.info("聚合分账请求明文："+jsonObject.toString());
         encAndDnc=new EncAndDnc();
         //加密后的字符串
-        String signContent= encAndDnc.encMessage(reqInfo.getSignContent());
+         String signContent= encAndDnc.encMessage(jsonObject.toString());
         map.put("method",reqInfo.getMethod());
         map.put("signContent",signContent);
         String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
@@ -134,6 +141,10 @@ public class PolymerizePay {
         log.info("响应明文结果"+encAndDnc.dencMessage(result));
 
     }
+
+
+
+
     @Test(description = "聚合支付订单查询")
     public void payQqury(){
         reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","聚合支付订单查询");
@@ -149,6 +160,45 @@ public class PolymerizePay {
         log.info("响应明文结果"+encAndDnc.dencMessage(result));
 
     }
+
+//聚合支付含营销户
+@Test(description = "聚合支付支付宝主扫含营销户")
+public void aliPayMarket(){
+
+        /*由接口可以知道，map的值几乎是固定的，唯一的变化就是会随着method的不同，进行变化，
+        那么对于数据库来说，只需要存储变化的内容即可，所以，再新增一张表，将method，以及signContent进行入库；
+        */
+    //支付请求，替换requestDate与transNo,并且加密
+    reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","聚合支付支付宝主扫");
+
+    JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
+    jsonObject.put("requestDate", TestConfig.dateString());
+    jsonObject.put("transNo",TestConfig.dateString());
+    //总收单金额：2000
+    jsonObject.put("totalOrderAmt","2000");
+    //营销户出1000
+    jsonObject.put("unionInfo","1000");
+    encAndDnc=new EncAndDnc();
+    //加密后的字符串
+    String signContent= encAndDnc.encMessage(jsonObject.toString());
+    log.info("请求明文："+jsonObject.toString());
+    reqInfo.setSignContent(signContent);
+    map.put("method",reqInfo.getMethod());
+    map.put("signContent",signContent);
+    String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
+    JSONObject jsonObject1= JSONObject.parseObject(result);
+
+    log.info("响应密文："+jsonObject1.toString());
+    //获取响应信息，并转换为json
+    JSONObject jsonObject2= JSONObject.parseObject(encAndDnc.dencMessage(result));
+    channelOrderNo= (String) jsonObject2.get("channelOrderNo");
+    tradeNo= (String) jsonObject2.get("tradeNo");
+
+    Assert.assertEquals(jsonObject2.get("respMsg"),"系统繁忙，请稍后再试");
+    log.info("响应明文结果"+jsonObject2.toString());
+    //  System.out.println("响应明文结果"+encAndDnc.dencMessage(result));
+
+}
 
 
 

@@ -16,7 +16,7 @@
     </select>
 
     <update id="updateBfTrans" parameterType="String">
-        UPDATE cgwfi_scan_pay_trans set state=3 ,sell_succ_flag=1 ,succ_money='0.01' where
+        UPDATE cgwfi_scan_pay_trans set state=3 ,sell_succ_flag=1 ,succ_money='10.00' where
         trade_no in (select trade_no  from BAOFOO_FI.fi_platform_business_order where member_transid=#{0});
 
 

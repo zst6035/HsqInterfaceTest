@@ -11,11 +11,12 @@ import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+//老接口，进件门店+宝财通商户号
 
 @Slf4j
 public class MerchantRegister {
     ReqInfo reqInfo;
-    EncAndDnc encAndDnc;
+    EncAndDnc encAndDnc=new EncAndDnc();
     String name=TestConfig.getChineseName(1);
     Map map;
     String uniqueCode=null;
@@ -49,7 +50,7 @@ public class MerchantRegister {
         jsonObject.put("phone","131"+TestConfig.getRandom4(8));
         jsonObject.put("servicePhone","131"+TestConfig.getRandom4(8));
 
-        encAndDnc=new EncAndDnc();
+
         log.info(jsonObject.toString());
         //加密后的字符串
         String signContent= encAndDnc.encMessage(jsonObject.toString());
@@ -82,7 +83,7 @@ public class MerchantRegister {
         jsonObject.put("uniqueCode",uniqueCode);
         jsonObject.put("outMerchantNo",outMerchantNo);
 
-        encAndDnc=new EncAndDnc();
+
         log.info(jsonObject.toString());
         //加密后的字符串
         String signContent= encAndDnc.encMessage(jsonObject.toString());
@@ -117,7 +118,7 @@ public class MerchantRegister {
         //非钱包用户：2，钱包用户：1
         jsonObject.put("userType","2");
 
-        encAndDnc=new EncAndDnc();
+
         log.info(jsonObject.toString());
         //加密后的字符串
         String signContent= encAndDnc.encMessage(jsonObject.toString());
@@ -148,7 +149,7 @@ public class MerchantRegister {
 
         jsonObject.put("outMerchantNo",outMerchantNo);
 
-        encAndDnc=new EncAndDnc();
+
         log.info(jsonObject.toString());
         //加密后的字符串
         String signContent= encAndDnc.encMessage(jsonObject.toString());
@@ -183,7 +184,7 @@ public class MerchantRegister {
         //非钱包用户：2，钱包用户：1
 
 
-        encAndDnc=new EncAndDnc();
+
         log.info(jsonObject.toString());
         //加密后的字符串
         String signContent= encAndDnc.encMessage(jsonObject.toString());
@@ -219,7 +220,7 @@ public class MerchantRegister {
         //1:个体工商户
         jsonObject.put("selfEmployed","1");
 
-        encAndDnc=new EncAndDnc();
+
         log.info(jsonObject.toString());
         //加密后的字符串
         String signContent= encAndDnc.encMessage(jsonObject.toString());
