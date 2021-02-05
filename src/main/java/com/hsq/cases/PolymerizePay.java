@@ -15,6 +15,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 //聚合交易
+/*
+* 主扫
+* 修改交易
+* 查询
+* 分账
+* 退款
+*
+*
+*
+*
+* */
 @Slf4j
 public class PolymerizePay {
     ReqInfo reqInfo;
@@ -42,8 +53,6 @@ public class PolymerizePay {
         map.put("signType","CFCA");
         map.put("sign",null);
 
-
-
     }
 
 //走宝付渠道，宝财通版本，收单后，分账
@@ -62,7 +71,7 @@ public class PolymerizePay {
         encAndDnc=new EncAndDnc();
         //加密后的字符串
         String signContent= encAndDnc.encMessage(jsonObject.toString());
-        log.info("加密后的字符串："+signContent);
+        //请求中的请求体替换为加密后的字符串
         reqInfo.setSignContent(signContent);
         map.put("method",reqInfo.getMethod());
         map.put("signContent",signContent);
@@ -143,8 +152,6 @@ public class PolymerizePay {
     }
 
 
-
-
     @Test(description = "聚合支付订单查询")
     public void payQqury(){
         reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","聚合支付订单查询");
@@ -165,19 +172,14 @@ public class PolymerizePay {
 @Test(description = "聚合支付支付宝主扫含营销户")
 public void aliPayMarket(){
 
-        /*由接口可以知道，map的值几乎是固定的，唯一的变化就是会随着method的不同，进行变化，
-        那么对于数据库来说，只需要存储变化的内容即可，所以，再新增一张表，将method，以及signContent进行入库；
-        */
-    //支付请求，替换requestDate与transNo,并且加密
     reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","聚合支付支付宝主扫");
-
     JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
     jsonObject.put("requestDate", TestConfig.dateString());
     jsonObject.put("transNo",TestConfig.dateString());
     //总收单金额：2000
     jsonObject.put("totalOrderAmt","2000");
     //营销户出1000
-    jsonObject.put("unionInfo","1000");
+    jsonObject.put("unionInfo","1000,883007563082");
     encAndDnc=new EncAndDnc();
     //加密后的字符串
     String signContent= encAndDnc.encMessage(jsonObject.toString());
@@ -199,7 +201,58 @@ public void aliPayMarket(){
     //  System.out.println("响应明文结果"+encAndDnc.dencMessage(result));
 
 }
+//退款
+
+    //微信公众号
+    @Test(description = "微信公众号下单")
+    public void WeChatJS(){
+        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","微信公众号");
+        JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
+        jsonObject.put("requestDate", TestConfig.dateString());
+        jsonObject.put("transNo",TestConfig.dateString());
+        //支付类型为微信公众号
+        jsonObject.put("payType","WECHAT_JSAPI");
+        encAndDnc=new EncAndDnc();
+        //加密后的字符串
+        String signContent= encAndDnc.encMessage(jsonObject.toString());
+        log.info("请求明文："+jsonObject.toString());
+        reqInfo.setSignContent(signContent);
+        map.put("method",reqInfo.getMethod());
+        map.put("signContent",signContent);
+        String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
+        //获取响应信息，解密后，转换为json
+        JSONObject jsonObject1= JSONObject.parseObject(encAndDnc.dencMessage(result));
+        Assert.assertEquals(jsonObject1.get("respMsg"),"交易处理中，请稍后查询");
+        log.info("响应明文结果"+jsonObject1.toString());
+
+    }
 
 
+
+    //微信小程序
+//微信公众号
+    @Test(description = "微信小程序下单")
+    public void WeChatApp(){
+        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","微信公众号");
+        JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
+        jsonObject.put("requestDate", TestConfig.dateString());
+        jsonObject.put("transNo",TestConfig.dateString());
+        //支付类型为微信公众号
+        jsonObject.put("payType","WECHAT_APPLET");
+        encAndDnc=new EncAndDnc();
+        //加密后的字符串
+        String signContent= encAndDnc.encMessage(jsonObject.toString());
+        log.info("请求明文："+jsonObject.toString());
+        reqInfo.setSignContent(signContent);
+        map.put("method",reqInfo.getMethod());
+        map.put("signContent",signContent);
+        String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
+        //获取响应信息，解密后，转换为json
+        JSONObject jsonObject1= JSONObject.parseObject(encAndDnc.dencMessage(result));
+        Assert.assertEquals(jsonObject1.get("respMsg"),"交易处理中，请稍后查询");
+
+        log.info("响应明文结果"+jsonObject1.toString());
+
+    }
 
 }
