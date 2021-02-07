@@ -21,9 +21,8 @@ import java.util.Map;
 * 查询
 * 分账
 * 退款
-*
-*
-*
+*微信公众号下单
+* 微信小程序下单
 *
 * */
 @Slf4j
@@ -148,7 +147,6 @@ public class PolymerizePay {
         Assert.assertEquals(jsonObject3.get("respMsg"),"交易成功");
         log.info("响应密文："+jsonObject2.toString());
         log.info("响应明文结果"+encAndDnc.dencMessage(result));
-
     }
 
 
@@ -250,7 +248,6 @@ public void aliPayMarket(){
         //获取响应信息，解密后，转换为json
         JSONObject jsonObject1= JSONObject.parseObject(encAndDnc.dencMessage(result));
         Assert.assertEquals(jsonObject1.get("respMsg"),"交易处理中，请稍后查询");
-
         log.info("响应明文结果"+jsonObject1.toString());
 
     }
