@@ -16,27 +16,18 @@ public class Ebank {
     //基础参数
     ReqInfo reqInfo;
     EncAndDnc encAndDnc=new EncAndDnc();
-    Map map;
+    Map map=TestConfig.getMap();
     String transNo= TestConfig.dateString();
 
     @BeforeClass
     public void BeforePay(){
-        map=new HashMap();
-        /*由接口可以知道，map的值几乎是固定的，唯一的变化就是会随着method的不同，进行变化，
-        那么对于数据库来说，只需要存储变化的内容即可，所以，再新增一张表，将method，以及signContent进行入库；
-        */
-        //这些针对所有请求都是一样的，不变化的；
-        map.put("merchantNo", TestConfig.merchant.getMerchantNo());
-        map.put("version","1.0.0");
-        map.put("format","json");
-        map.put("signType","CFCA");
-        map.put("sign",null);
+       log.info("before 测试");
     }
 
 
     @Test(description = "网银支付预下单")
     public void eBank(){
-        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","网银支付预下单");
+        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","网银支付预下单");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("requestDate", TestConfig.dateString());
         jsonObject.put("transNo",transNo);
@@ -63,7 +54,7 @@ public class Ebank {
 
     @Test(description ="网银订单查询",dependsOnMethods = "eBank")
     public void eBankQuery(){
-        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","网银订单查询");
+        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","网银订单查询");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("requestDate", TestConfig.dateString());
         jsonObject.put("transNo",transNo);
@@ -88,7 +79,7 @@ public class Ebank {
     }
     @Test(description ="网银分账",dependsOnMethods = "eBank")
     public void eBankShare(){
-        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","网银分账");
+        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","网银分账");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("requestDate", TestConfig.dateString());
         jsonObject.put("origTransNo",transNo);

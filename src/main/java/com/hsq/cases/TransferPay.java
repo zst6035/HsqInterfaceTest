@@ -33,7 +33,7 @@ public class TransferPay {
 
     @Test(description = "代付-工商银行")
     public void transFer(){
-        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","代付");
+        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","代付");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("requestDate", TestConfig.dateString());
         jsonObject.put("transNo",transNo);
@@ -63,7 +63,7 @@ public class TransferPay {
 
     @Test(description = "代付查询")
     public void transFerQuery(){
-        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","代付查询");
+        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","代付查询");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("requestDate", TestConfig.dateString());
         jsonObject.put("transNo",transNo);

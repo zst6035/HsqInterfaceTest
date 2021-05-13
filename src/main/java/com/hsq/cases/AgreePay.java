@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 /*
-* 协议支付绑卡
+* 协议支付绑卡--建设银行
 * 协议支付确认绑卡
 * 协议支付直接支付
 * 协议支付分账
@@ -27,33 +27,23 @@ public class AgreePay {
     EncAndDnc encAndDnc=new EncAndDnc();
     String uniqueCode=null;
     String agreePayNo=null;
-    Map map;
+    Map map=TestConfig.getMap();
     String transNo=TestConfig.dateString();
     String transNo2=TestConfig.dateString();
 
     //协议支付
     @BeforeClass
     public void BeforePay(){
-        map=new HashMap();
-        /*由接口可以知道，map的值几乎是固定的，唯一的变化就是会随着method的不同，进行变化，
-        那么对于数据库来说，只需要存储变化的内容即可，所以，再新增一张表，将method，以及signContent进行入库；
-        */
-        //这些针对所有请求都是一样的，不变化的；
-        map.put("merchantNo",TestConfig.merchant.getMerchantNo());
-        map.put("version","1.0.0");
-        map.put("format","json");
-        map.put("signType","CFCA");
-        map.put("sign",null);
+       log.info("测试之前");
     }
 
     @Test(description = "协议支付预绑卡",groups = "bind" ,testName = "协议支付预绑卡")
     public void AgreePayPreBind(){
-        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","协议支付预绑卡");
+        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","协议支付预绑卡");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("requestDate", TestConfig.dateString());
         jsonObject.put("transNo",TestConfig.dateString());
-
-
+        jsonObject.put("accNo","621082"+TestConfig.getRandom4(9)+"2");
         //加密后的字符串
         String signContent= encAndDnc.encMessage(jsonObject.toString());
         //   log.info("加密后的字符串："+signContent);
@@ -77,7 +67,7 @@ public class AgreePay {
 
     @Test(description = "协议支付确认绑卡",dependsOnMethods = "AgreePayPreBind",groups = "bind",testName ="协议支付确认绑卡" )
     public void AgreePayConfigBind(){
-        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","协议支付确认绑卡");
+        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","协议支付确认绑卡");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("requestDate", TestConfig.dateString());
         jsonObject.put("uniqueCode",uniqueCode);
@@ -103,7 +93,7 @@ public class AgreePay {
 
     @Test(description = "协议支付直接支付" ,dependsOnGroups = "bind",testName = "协议支付直接支付")
     public void AgreeDirectPay(){
-        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","协议支付直接支付");
+        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","协议支付直接支付");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("transNo",transNo);
         jsonObject.put("requestDate", TestConfig.dateString());
@@ -126,7 +116,7 @@ public class AgreePay {
 
     @Test(description = "协议支付订单查询",testName = "协议支付订单查询")
     public void AgreePayQuery(){
-        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","协议支付订单查询");
+        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","协议支付订单查询");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("transNo",transNo);
         jsonObject.put("requestDate", TestConfig.dateString());
@@ -146,7 +136,7 @@ public class AgreePay {
 
     @Test(description = "协议支付分账" ,dependsOnMethods ="AgreeDirectPay",testName ="协议支付分账" )
     public void AgreeShare(){
-        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","协议支付分账");
+        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","协议支付分账");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("transNo",TestConfig.dateString());
         jsonObject.put("requestDate", TestConfig.dateString());
@@ -169,7 +159,7 @@ public class AgreePay {
     //含已分账的归集回来
      @Test(description = "协议支付退款" ,dependsOnMethods = "AgreeDirectPay")
     public void AgreePayRefund(){
-        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","协议支付退款");
+        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","协议支付退款");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("transNo",TestConfig.dateString());
         jsonObject.put("requestDate", TestConfig.dateString());
@@ -193,7 +183,7 @@ public class AgreePay {
     //1+1
     @Test(description = "协议支付含营销户" ,dependsOnGroups = "bind")
     public void AgreeDirectPayIncludeMarketing(){
-        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","协议支付含营销户");
+        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","协议支付含营销户");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("transNo",transNo2);
         jsonObject.put("requestDate", TestConfig.dateString());
@@ -215,7 +205,7 @@ public class AgreePay {
 
     @Test(description = "协议支付含营销户退款" ,dependsOnMethods = "AgreeDirectPay")
     public void AgreePayRefundMarketing(){
-        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","协议支付含营销户退款");
+        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","协议支付含营销户退款");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("transNo",TestConfig.dateString());
         jsonObject.put("requestDate", TestConfig.dateString());

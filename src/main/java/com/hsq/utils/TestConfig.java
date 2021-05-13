@@ -41,16 +41,26 @@ public class TestConfig {
     public static  String url;
     public static HttpClient defaultHttpClient ;
     public static CookieStore store;
-    public static SqlSession session;
+    public static SqlSession sessionLocalhost;
     public static SqlSession sessionBf;
     public static SqlSession sessionHsqTrade;
     public static SqlSession sessionHsqGateway;
     public static Integer userId;
 
 
+    public static HashMap getMap() {
+        HashMap map=new HashMap();
+        map.put("merchantNo",TestConfig.merchant.getMerchantNo());
+        map.put("version","5.0.0");
+        map.put("format","json");
+        map.put("signType","CFCA");
+        map.put("sign",null);
+        return map;
+    }
+
     static {
         try {
-            session = DatabaseUtil.getSqlSession1();
+            sessionLocalhost = DatabaseUtil.getSqlSession1();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,7 +68,7 @@ public class TestConfig {
 
 
     //因为merchant不经常变化，所以直接在这里定义好
-    public static Merchant merchant=session.selectOne("selMerchantInfo");
+    public static Merchant merchant=sessionLocalhost.selectOne("selMerchantInfo");
 
     //以json方式访问公共方法,获取请求结果 状态message
     public static  String getResult(String url,String body)throws IOException {
@@ -255,8 +265,8 @@ public static void sendMail(String[] tos,File file) throws Exception {
         System.out.println(parse);
         for (int i = 0; i < 365; i++) {
             DateTime offset = DateUtil.offset(parse, DateField.DAY_OF_MONTH, i);
-            TestConfig.session.insert("InDate", offset.toString());
-            TestConfig.session.commit();
+            TestConfig.sessionLocalhost.insert("InDate", offset.toString());
+            TestConfig.sessionLocalhost.commit();
 
         }
 

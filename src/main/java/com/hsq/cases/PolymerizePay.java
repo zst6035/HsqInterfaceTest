@@ -62,7 +62,7 @@ public class PolymerizePay {
         那么对于数据库来说，只需要存储变化的内容即可，所以，再新增一张表，将method，以及signContent进行入库；
         */
         //支付请求，替换requestDate与transNo,并且加密
-        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","聚合支付支付宝主扫");
+        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","聚合支付支付宝主扫");
         log.info("请求明文："+reqInfo.toString());
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("requestDate", TestConfig.dateString());
@@ -127,7 +127,7 @@ public class PolymerizePay {
    // @Test(description = "聚合分账",dependsOnMethods = "selBfTrans")
     @Test(description = "聚合分账")
     public void payShare(){
-        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","聚合分账");
+        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","聚合分账");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("transNo", TestConfig.dateString());
         jsonObject.put("origTransNo",transNo);
@@ -152,7 +152,7 @@ public class PolymerizePay {
 
     @Test(description = "聚合支付订单查询")
     public void payQqury(){
-        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","聚合支付订单查询");
+        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","聚合支付订单查询");
         encAndDnc=new EncAndDnc();
         //加密后的字符串
         String signContent= encAndDnc.encMessage(reqInfo.getSignContent());
@@ -170,7 +170,7 @@ public class PolymerizePay {
 @Test(description = "聚合支付支付宝主扫含营销户")
 public void aliPayMarket(){
 
-    reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","聚合支付支付宝主扫");
+    reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","聚合支付支付宝主扫");
     JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
     jsonObject.put("requestDate", TestConfig.dateString());
     jsonObject.put("transNo",TestConfig.dateString());
@@ -204,7 +204,7 @@ public void aliPayMarket(){
     //微信公众号
     @Test(description = "微信公众号下单")
     public void WeChatJS(){
-        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","微信公众号");
+        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","微信公众号");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("requestDate", TestConfig.dateString());
         jsonObject.put("transNo",TestConfig.dateString());
@@ -231,7 +231,7 @@ public void aliPayMarket(){
 //微信公众号
     @Test(description = "微信小程序下单")
     public void WeChatApp(){
-        reqInfo = TestConfig.session.selectOne("com.hsq.selReqInfo","微信公众号");
+        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","微信公众号");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("requestDate", TestConfig.dateString());
         jsonObject.put("transNo",TestConfig.dateString());
