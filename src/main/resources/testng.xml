@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="TestSuite">
-    <test name="ehr_test">
+    <test name="hsq_test">
         <!--此处可以是包，也是直接是test类，包的话路径不能到类名-->
-        <!--<packages>-->
-            <!--<package name ="com.huishouqian.test" />-->
-   <!--</packages>-->
-        <classes>
-            <!--协议支付-->
-            <class name="com.hsq.cases.AgreePay"></class>
-            <!--<class name="com.huishouqian.test.Test02"></class>-->
-        </classes>
+        <packages>
+            <package name ="com.hsq.cases" />
+   </packages>
+        <!--<classes>-->
+            <!--&lt;!&ndash;协议支付&ndash;&gt;-->
+            <!--<class name="com.hsq.cases.AgreePay"></class>-->
+            <!--&lt;!&ndash;<class name="com.huishouqian.test.Test02"></class>&ndash;&gt;-->
+        <!--</classes>-->
     </test>
     <listeners>
         <listener class-name="com.hsq.config.ExtentTestNGIReporterListener" />

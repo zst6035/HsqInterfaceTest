@@ -23,7 +23,6 @@ import java.util.Map;
 public class StoreRegister {
     ReqInfo reqInfo;
     EncAndDnc encAndDnc=new EncAndDnc();
-    String name=TestConfig.getChineseName(1);
     Map map;
    String transNo=TestConfig.dateString();
 
@@ -45,7 +44,7 @@ public class StoreRegister {
       JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","622848"+TestConfig.getRandom4(13));
         jsonObject.put("transNo",TestConfig.dateString());
-        jsonObject.put("contactName",name);
+        jsonObject.put("contactName",TestConfig.getChineseName(2));
         jsonObject.put("selfEmployed","2");
         jsonObject.put("contactPhone","131"+TestConfig.getRandom4(8));
         jsonObject.put("servicePhone","131"+TestConfig.getRandom4(8));
@@ -74,8 +73,8 @@ public class StoreRegister {
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","622848"+TestConfig.getRandom4(13));
         jsonObject.put("transNo",transNo);
-        jsonObject.put("contactName",name);
-        jsonObject.put("legalName",name);
+        jsonObject.put("contactName",TestConfig.getChineseName(2));
+        jsonObject.put("legalName",TestConfig.getChineseName(2));
         jsonObject.put("contactPhone","131"+TestConfig.getRandom4(8));
         jsonObject.put("servicePhone","131"+TestConfig.getRandom4(8));
         log.info("请求明文："+jsonObject.toString());
@@ -102,7 +101,7 @@ public class StoreRegister {
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","622848"+TestConfig.getRandom4(13));
         jsonObject.put("transNo",TestConfig.dateString());
-        jsonObject.put("name",name);
+        jsonObject.put("name",TestConfig.getChineseName(2));
         jsonObject.put("bankPhone","131"+TestConfig.getRandom4(8));
         jsonObject.put("phone","131"+TestConfig.getRandom4(8));
         log.info("请求明文："+jsonObject.toString());
@@ -112,11 +111,14 @@ public class StoreRegister {
         map.put("method",reqInfo.getMethod());
         map.put("signContent",signContent);
         String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
-        String res=encAndDnc.dencMessage(result);
+        //这里不重新定义一个，会拿不到数据；所以就重新定义一个，有很多地方都有这毛病
+        EncAndDnc e1=new EncAndDnc(); ;
+        String res=e1.dencMessage(result);
         //再将请求结果转换为json格式
         JSONObject jsonObject2= JSONObject.parseObject(res);
-        Assert.assertEquals(jsonObject2.get("respMsg"),"受理成功");
         log.info("响应明文结果"+res);
+        Assert.assertEquals(jsonObject2.get("respMsg"),"受理成功");
+
     }
 
 //报备结果查询

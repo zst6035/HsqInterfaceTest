@@ -2,6 +2,7 @@ package com.hsq.cases;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hsq.model.ReqInfo;
+import com.hsq.utils.DatabaseUtil;
 import com.hsq.utils.EncAndDnc;
 import com.hsq.utils.TestConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -27,9 +28,9 @@ public class MerchantRegister {
     }
 
 
-    @Test(description = "商户进件-消费户个人")
-    public void merchantRegister(){
-        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","商户进件-个人");
+    @Test(description = "宝财通-消费户个人")
+    public void merchantRegister() throws Exception{
+        ReqInfo reqInfo=DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","商户进件-个人");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","621082"+TestConfig.getRandom4(9)+"2");
         jsonObject.put("outMerchantNo", outMerchantNo);
@@ -51,7 +52,8 @@ public class MerchantRegister {
         //返回数据转换为json
         // JSONObject jsonObject1=JSONObject.parseObject(result);
         //请求结果进行解密
-        String res=encAndDnc.dencMessage(result);
+        EncAndDnc e1=new EncAndDnc();
+        String res=e1.dencMessage(result);
         //再将请求结果转换为json格式
         JSONObject jsonObject2= JSONObject.parseObject(res);
         log.info("响应明文结果"+res);
@@ -93,9 +95,9 @@ public class MerchantRegister {
 
     }
 
-    @Test(description = "商户进件-非消费户个人")
-    public void merchantRegisterCommon(){
-        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","商户进件-个人");
+    @Test(description = "宝财通-非消费户个人")
+    public void merchantRegisterCommon() throws Exception{
+        ReqInfo reqInfo= DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","商户进件-个人");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","621082"+TestConfig.getRandom4(9)+"2");
         jsonObject.put("outMerchantNo", TestConfig.dateString());
@@ -163,9 +165,9 @@ public class MerchantRegister {
 
     }
     //企业商户进件
-    @Test(description = "商户进件-企业")
-    public void merchantRegisterCompany(){
-        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","企业商户进件");
+    @Test(description = "宝财通-企业")
+    public void merchantRegisterCompany() throws Exception{
+        ReqInfo reqInfo= DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","企业商户进件");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","621082"+TestConfig.getRandom4(10));
         jsonObject.put("outMerchantNo", TestConfig.dateString());
@@ -198,9 +200,9 @@ public class MerchantRegister {
 
     }
     //个体工商户
-    @Test(description = "商户进件-个体工商户")
-    public void merchantRegisterPersonCompany(){
-        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","企业商户进件");
+    @Test(description = "宝财通-个体工商户")
+    public void merchantRegisterPersonCompany()throws Exception{
+        ReqInfo reqInfo=  DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","商户进件-个体工商户");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","621082"+TestConfig.getRandom4(10));
         jsonObject.put("outMerchantNo", TestConfig.dateString());

@@ -257,7 +257,14 @@ public static void sendMail(String[] tos,File file) throws Exception {
         return dateString;
 
     }
+    public static String transNo(){
+        DateFormat dateFormat=new SimpleDateFormat("YYYYMMddHHmmss");
+        Date now=new Date();
+        String dateString= dateFormat.format(now)+getRandom4(10);
+        // System.out.println(dateString);
+        return dateString;
 
+    }
 
     //将一年的日期循环插入表中
     public static void DateIn(){

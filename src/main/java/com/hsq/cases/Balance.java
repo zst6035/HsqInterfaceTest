@@ -215,9 +215,5 @@ public class Balance {
         Assert.assertEquals(jsonObject2.get("respMsg"),"交易成功");
 
     }
-    @AfterClass
-    public void afterclass(){
-        log.info("结束测试");
-        TestConfig.sessionLocalhost.close();
-    }
+
 }
