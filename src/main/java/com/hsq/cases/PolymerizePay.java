@@ -117,16 +117,17 @@ public class PolymerizePay {
     }
 
 //聚合支付含营销户
-@Test(description = "聚合支付支付宝主扫含营销户")
+@Test(description = "聚合支付支付宝主扫含营销户出款")
 public void aliPayMarket()throws Exception{
     ReqInfo reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","聚合支付支付宝主扫");
     JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
     jsonObject.put("requestDate", TestConfig.dateString());
     jsonObject.put("transNo",TestConfig.dateString());
     //总收单金额：2000
+    jsonObject.put("orderAmt","1000");
     jsonObject.put("totalOrderAmt","2000");
     //营销户出1000
-    jsonObject.put("unionInfo","1000,883007563082");
+    jsonObject.put("unionInfo","883007563082,1000");
     encAndDnc=new EncAndDnc();
     //加密后的字符串
     String signContent= encAndDnc.encMessage(jsonObject.toString());

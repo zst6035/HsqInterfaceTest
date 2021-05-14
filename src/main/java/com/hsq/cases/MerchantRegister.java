@@ -14,7 +14,7 @@ import java.util.Map;
 
 @Slf4j
 public class MerchantRegister {
-    ReqInfo reqInfo;
+
     EncAndDnc encAndDnc=new EncAndDnc();
     String name=TestConfig.getChineseName(1);
     Map map=TestConfig.getMap();
@@ -66,8 +66,8 @@ public class MerchantRegister {
 
     //确认绑卡
     @Test(description = "开户确认",dependsOnMethods = "merchantRegister")
-    public void merchantRegisterConfirm(){
-        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","个人进件-开户确认");
+    public void merchantRegisterConfirm()throws Exception{
+      ReqInfo  reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","个人进件-开户确认");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
 
 
@@ -136,8 +136,8 @@ public class MerchantRegister {
 
     //结果查询
     @Test(description = "消费户进件结果查询",dependsOnMethods = "merchantRegister")
-    public void merchantRegisterQuery(){
-        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","进件结果-查询");
+    public void merchantRegisterQuery()throws Exception{
+       ReqInfo reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","进件结果-查询");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
 
         jsonObject.put("outMerchantNo",outMerchantNo);

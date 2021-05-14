@@ -2,6 +2,7 @@ package com.hsq.cases;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hsq.model.ReqInfo;
+import com.hsq.utils.DatabaseUtil;
 import com.hsq.utils.EncAndDnc;
 import com.hsq.utils.TestConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -21,7 +22,7 @@ import java.util.Map;
 
 @Slf4j
 public class StoreRegister {
-    ReqInfo reqInfo;
+
     EncAndDnc encAndDnc=new EncAndDnc();
     Map map;
    String transNo=TestConfig.dateString();
@@ -39,8 +40,8 @@ public class StoreRegister {
 
 
     @Test(description = "门店个体工商户报备")
-    public void  legalRegister() throws InterruptedException {
-        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","门店个体工商户报备");
+    public void  legalRegister() throws  Exception {
+      ReqInfo  reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","门店个体工商户报备");
       JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","622848"+TestConfig.getRandom4(13));
         jsonObject.put("transNo",TestConfig.dateString());
@@ -68,8 +69,8 @@ public class StoreRegister {
 
 
     @Test(description = "门店企业报备" )
-    public void  CompanyRegister(){
-        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","门店企业报备");
+    public void  CompanyRegister()throws Exception{
+        ReqInfo  reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","门店企业报备");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","622848"+TestConfig.getRandom4(13));
         jsonObject.put("transNo",transNo);
@@ -96,8 +97,8 @@ public class StoreRegister {
 
 
     @Test(description = "门店个人报备")
-    public void personalRegister(){
-        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","门店个人报备");
+    public void personalRegister()throws Exception{
+        ReqInfo  reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","门店个人报备");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","622848"+TestConfig.getRandom4(13));
         jsonObject.put("transNo",TestConfig.dateString());
@@ -123,8 +124,8 @@ public class StoreRegister {
 
 //报备结果查询
 @Test(description = "门店报备结果查询",dependsOnMethods = "CompanyRegister")
-public void  RegisterResult(){
-   reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","门店报备结果查询");
+public void  RegisterResult()throws Exception{
+    ReqInfo  reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","门店报备结果查询");
     JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
     jsonObject.put("transNo",transNo);
     log.info("请求明文："+jsonObject.toString());
