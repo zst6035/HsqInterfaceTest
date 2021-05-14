@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-//门店报备
+//门店报备,新增门店，并报备smid
 /*
 * 企业报备
 * 个人报备
