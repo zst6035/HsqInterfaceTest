@@ -41,7 +41,8 @@ public class MerchantRegister {
         jsonObject.put("servicePhone","131"+TestConfig.getRandom4(8));
         log.info("请求体"+jsonObject.toString());
         //加密后的字符串
-        String signContent= encAndDnc.encMessage(jsonObject.toString());
+        EncAndDnc e1=new EncAndDnc();
+        String signContent= e1.encMessage(jsonObject.toString());
         reqInfo.setSignContent(signContent);
         //此处需要注意是代理商商户号，不是商户号
         map.put("agentMerchantNo","883007563082");
@@ -52,7 +53,7 @@ public class MerchantRegister {
         //返回数据转换为json
         // JSONObject jsonObject1=JSONObject.parseObject(result);
         //请求结果进行解密
-        EncAndDnc e1=new EncAndDnc();
+
         String res=e1.dencMessage(result);
         //再将请求结果转换为json格式
         JSONObject jsonObject2= JSONObject.parseObject(res);
@@ -167,7 +168,7 @@ public class MerchantRegister {
     //企业商户进件
     @Test(description = "宝财通-企业")
     public void merchantRegisterCompany() throws Exception{
-        ReqInfo reqInfo= DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","企业商户进件");
+        ReqInfo reqInfo= DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","宝财通企业商户进件");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","621082"+TestConfig.getRandom4(10));
         jsonObject.put("outMerchantNo", TestConfig.dateString());
@@ -202,7 +203,7 @@ public class MerchantRegister {
     //个体工商户
     @Test(description = "宝财通-个体工商户")
     public void merchantRegisterPersonCompany()throws Exception{
-        ReqInfo reqInfo=  DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","商户进件-个体工商户");
+        ReqInfo reqInfo=  DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","宝财通企业商户进件");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","621082"+TestConfig.getRandom4(10));
         jsonObject.put("outMerchantNo", TestConfig.dateString());
@@ -213,11 +214,10 @@ public class MerchantRegister {
         jsonObject.put("email",TestConfig.getEmail(5,10));
         //1:个体工商户
         jsonObject.put("selfEmployed","1");
-
-
         log.info(jsonObject.toString());
         //加密后的字符串
-        String signContent= encAndDnc.encMessage(jsonObject.toString());
+        EncAndDnc e6=new EncAndDnc();
+        String signContent= e6.encMessage(jsonObject.toString());
 
         reqInfo.setSignContent(signContent);
         map.put("method",reqInfo.getMethod());
@@ -227,7 +227,7 @@ public class MerchantRegister {
         //返回数据转换为json
         // JSONObject jsonObject1=JSONObject.parseObject(result);
         //请求结果进行解密
-        String res=encAndDnc.dencMessage(result);
+        String res=e6.dencMessage(result);
         //再将请求结果转换为json格式
         JSONObject jsonObject2= JSONObject.parseObject(res);
         log.info("响应明文结果"+res);

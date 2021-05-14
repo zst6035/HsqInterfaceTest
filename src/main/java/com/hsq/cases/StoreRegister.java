@@ -23,7 +23,7 @@ import java.util.Map;
 @Slf4j
 public class StoreRegister {
 
-    EncAndDnc encAndDnc=new EncAndDnc();
+ //   EncAndDnc encAndDnc=new EncAndDnc();
     Map map;
    String transNo=TestConfig.dateString();
 
@@ -51,7 +51,8 @@ public class StoreRegister {
         jsonObject.put("servicePhone","131"+TestConfig.getRandom4(8));
         log.info("请求明文："+jsonObject.toString());
         //加密后的字符串
-        String signContent= encAndDnc.encMessage(jsonObject.toString());
+        EncAndDnc e2=new EncAndDnc();
+        String signContent= e2.encMessage(jsonObject.toString());
         reqInfo.setSignContent(signContent);
         map.put("method",reqInfo.getMethod());
         map.put("signContent",signContent);
@@ -60,7 +61,7 @@ public class StoreRegister {
         //返回数据转换为json
         // JSONObject jsonObject1=JSONObject.parseObject(result);
         //请求结果进行解密
-        String res=encAndDnc.dencMessage(result);
+        String res=e2.dencMessage(result);
         //再将请求结果转换为json格式
         JSONObject jsonObject2= JSONObject.parseObject(res);
         Assert.assertEquals(jsonObject2.get("respMsg"),"受理成功");
@@ -80,7 +81,8 @@ public class StoreRegister {
         jsonObject.put("servicePhone","131"+TestConfig.getRandom4(8));
         log.info("请求明文："+jsonObject.toString());
         //加密后的字符串
-        String signContent= encAndDnc.encMessage(jsonObject.toString());
+        EncAndDnc e7=new EncAndDnc();
+        String signContent= e7.encMessage(jsonObject.toString());
         reqInfo.setSignContent(signContent);
         map.put("method",reqInfo.getMethod());
         map.put("signContent",signContent);
@@ -88,11 +90,12 @@ public class StoreRegister {
         //返回数据转换为json
         // JSONObject jsonObject1=JSONObject.parseObject(result);
         //请求结果进行解密
-        String res=encAndDnc.dencMessage(result);
+        String res=e7.dencMessage(result);
         //再将请求结果转换为json格式
         JSONObject jsonObject2= JSONObject.parseObject(res);
-        Assert.assertEquals(jsonObject2.get("respMsg"),"受理成功");
         log.info("响应明文结果"+res);
+        Assert.assertEquals(jsonObject2.get("respMsg"),"受理成功");
+
     }
 
 
@@ -107,14 +110,16 @@ public class StoreRegister {
         jsonObject.put("phone","131"+TestConfig.getRandom4(8));
         log.info("请求明文："+jsonObject.toString());
         //加密后的字符串
-        String signContent= encAndDnc.encMessage(jsonObject.toString());
+        //这里不重新定义一个，会拿不到数据；所以就重新定义一个，有很多地方都有这毛病
+        EncAndDnc e4=new EncAndDnc();
+        String signContent= e4.encMessage(jsonObject.toString());
         reqInfo.setSignContent(signContent);
         map.put("method",reqInfo.getMethod());
         map.put("signContent",signContent);
         String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
-        //这里不重新定义一个，会拿不到数据；所以就重新定义一个，有很多地方都有这毛病
-        EncAndDnc e1=new EncAndDnc(); ;
-        String res=e1.dencMessage(result);
+
+
+        String res=e4.dencMessage(result);
         //再将请求结果转换为json格式
         JSONObject jsonObject2= JSONObject.parseObject(res);
         log.info("响应明文结果"+res);
@@ -130,12 +135,14 @@ public void  RegisterResult()throws Exception{
     jsonObject.put("transNo",transNo);
     log.info("请求明文："+jsonObject.toString());
     //加密后的字符串
-    String signContent= encAndDnc.encMessage(jsonObject.toString());
+    EncAndDnc e4=new EncAndDnc();
+    String signContent= e4.encMessage(jsonObject.toString());
     reqInfo .setSignContent(signContent);
     map.put("method",reqInfo.getMethod());
     map.put("signContent",signContent);
     String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
-    String res=encAndDnc.dencMessage(result);
+
+    String res=e4.dencMessage(result);
     //再将请求结果转换为json格式
     JSONObject jsonObject2= JSONObject.parseObject(res);
     Assert.assertEquals(jsonObject2.get("respMsg"),"受理成功");

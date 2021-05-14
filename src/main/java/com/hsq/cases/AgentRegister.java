@@ -2,6 +2,7 @@ package com.hsq.cases;
 
 import com.alibaba.fastjson.JSONObject;
 import com.hsq.model.ReqInfo;
+import com.hsq.utils.DatabaseUtil;
 import com.hsq.utils.EncAndDnc;
 import com.hsq.utils.TestConfig;
 import lombok.extern.slf4j.Slf4j;
@@ -22,8 +23,7 @@ import java.util.Map;
 
 @Slf4j
 public class AgentRegister {
-    ReqInfo reqInfo;
-    EncAndDnc encAndDnc=new EncAndDnc();
+
     String name=TestConfig.getChineseName(1);
     Map map;
    String transNo=TestConfig.dateString();
@@ -41,8 +41,8 @@ public class AgentRegister {
 
 
     @Test(description = "代理商报备企业平台商")
-    public void  AgentCompanyRegister(){
-        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","代理商报备企业商户");
+    public void  AgentCompanyRegister()throws Exception{
+       ReqInfo reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","代理商报备企业商户");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","622848"+TestConfig.getRandom4(13));
         jsonObject.put("transNo",transNo);
@@ -51,13 +51,14 @@ public class AgentRegister {
         jsonObject.put("servicePhone","131"+TestConfig.getRandom4(8));
         log.info("请求明文："+jsonObject.toString());
         //加密后的字符串
-        String signContent= encAndDnc.encMessage(jsonObject.toString());
+        EncAndDnc e1=new EncAndDnc();
+        String signContent=e1.encMessage(jsonObject.toString());
         reqInfo.setSignContent(signContent);
         map.put("method",reqInfo.getMethod());
         map.put("signContent",signContent);
         String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
 
-        String res=encAndDnc.dencMessage(result);
+        String res=e1.dencMessage(result);
         //再将请求结果转换为json格式
         JSONObject jsonObject2= JSONObject.parseObject(res);
         Assert.assertEquals(jsonObject2.get("respMsg"),"受理成功");
@@ -66,8 +67,8 @@ public class AgentRegister {
 
 
     @Test(description = "代理商报备个体工商户")
-    public void  AgentLegalRegister(){
-        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","代理商报备个体工商户");
+    public void  AgentLegalRegister()throws Exception{
+       ReqInfo reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","代理商报备个体工商户");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","622848"+TestConfig.getRandom4(13));
         jsonObject.put("transNo",TestConfig.dateString());
@@ -76,7 +77,8 @@ public class AgentRegister {
         jsonObject.put("servicePhone","131"+TestConfig.getRandom4(8));
         log.info("请求明文："+jsonObject.toString());
         //加密后的字符串
-        String signContent= encAndDnc.encMessage(jsonObject.toString());
+        EncAndDnc e2=new EncAndDnc();
+        String signContent= e2.encMessage(jsonObject.toString());
         reqInfo.setSignContent(signContent);
         map.put("method",reqInfo.getMethod());
         map.put("signContent",signContent);
@@ -84,7 +86,7 @@ public class AgentRegister {
         //返回数据转换为json
         // JSONObject jsonObject1=JSONObject.parseObject(result);
         //请求结果进行解密
-        String res=encAndDnc.dencMessage(result);
+        String res=e2.dencMessage(result);
         //再将请求结果转换为json格式
         JSONObject jsonObject2= JSONObject.parseObject(res);
         Assert.assertEquals(jsonObject2.get("respMsg"),"受理成功");
@@ -93,8 +95,8 @@ public class AgentRegister {
 
 
     @Test(description = "代理商报备自然人商户")
-    public void AgentPersonalRegister(){
-        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","代理商报备自然人商户");
+    public void AgentPersonalRegister()throws Exception{
+      ReqInfo  reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","代理商报备自然人商户");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         //修改一些常用变量
         jsonObject.put("bankCardNo","622848"+TestConfig.getRandom4(13));
@@ -104,32 +106,35 @@ public class AgentRegister {
         jsonObject.put("phone","131"+TestConfig.getRandom4(8));
         log.info("请求明文："+jsonObject.toString());
         //加密后的字符串
-        String signContent= encAndDnc.encMessage(jsonObject.toString());
+        EncAndDnc e3=new EncAndDnc();
+        String signContent= e3.encMessage(jsonObject.toString());
         reqInfo.setSignContent(signContent);
         map.put("method",reqInfo.getMethod());
         map.put("signContent",signContent);
         String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
-        String res=encAndDnc.dencMessage(result);
+        String res=e3.dencMessage(result);
         //再将请求结果转换为json格式
         JSONObject jsonObject2= JSONObject.parseObject(res);
-        Assert.assertEquals(jsonObject2.get("respMsg"),"受理成功");
         log.info("代理商报备自然人商户响应明文结果"+res);
+        Assert.assertEquals(jsonObject2.get("respMsg"),"受理成功");
+
     }
 
 //报备结果查询
 @Test(description = "代理商报备结果查询",dependsOnMethods = "AgentCompanyRegister")
-public void  AgentRegisterResult(){
-    reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","代理商报备结果查询");
+public void  AgentRegisterResult()throws Exception{
+    ReqInfo reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","代理商报备结果查询");
     JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
     jsonObject.put("transNo",transNo);
     log.info("请求明文："+jsonObject.toString());
     //加密后的字符串
-    String signContent= encAndDnc.encMessage(jsonObject.toString());
+    EncAndDnc e4=new EncAndDnc();
+    String signContent= e4.encMessage(jsonObject.toString());
     reqInfo.setSignContent(signContent);
     map.put("method",reqInfo.getMethod());
     map.put("signContent",signContent);
     String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
-    String res=encAndDnc.dencMessage(result);
+    String res=e4.dencMessage(result);
     //再将请求结果转换为json格式
     JSONObject jsonObject2= JSONObject.parseObject(res);
     Assert.assertEquals(jsonObject2.get("respMsg"),"受理成功");
@@ -139,19 +144,20 @@ public void  AgentRegisterResult(){
 
 
     @Test(description = "代理商报备结果查询2")
-    public void  AgentRegisterResult2(){
-        reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","代理商报备结果查询");
+    public void  AgentRegisterResult2()throws Exception{
+     ReqInfo   reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","代理商报备结果查询");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         //对一个已经报备好的进行查询
         jsonObject.put("transNo","20210513153051");
         log.info("请求明文："+jsonObject.toString());
         //加密后的字符串
-        String signContent= encAndDnc.encMessage(jsonObject.toString());
+        EncAndDnc e5=new EncAndDnc();
+        String signContent= e5.encMessage(jsonObject.toString());
         reqInfo.setSignContent(signContent);
         map.put("method",reqInfo.getMethod());
         map.put("signContent",signContent);
         String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
-        String res=encAndDnc.dencMessage(result);
+        String res=e5.dencMessage(result);
         //再将请求结果转换为json格式
         JSONObject jsonObject2= JSONObject.parseObject(res);
         Assert.assertEquals(jsonObject2.get("respMsg"),"成功");
