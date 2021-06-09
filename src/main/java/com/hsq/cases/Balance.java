@@ -48,6 +48,8 @@ public class Balance {
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("requestDate", TestConfig.dateString());
         jsonObject.put("transNo",transNo);
+        //二级户配置的银行卡号尾号是7，模拟处理中的状态;
+        jsonObject.put("subMerchantNo","2000401508492982");
 
 
         //加密后的字符串

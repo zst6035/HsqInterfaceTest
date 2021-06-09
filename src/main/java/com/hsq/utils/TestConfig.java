@@ -20,6 +20,7 @@ import org.apache.http.impl.client.HttpClientBuilder;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.cglib.beans.BeanMap;
 
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
@@ -96,7 +97,7 @@ public static  String getResponse(String url,String body)throws IOException{
      return result;
 }
 
-    //httpsend普通请求，此处声明了httpClient
+    //httpsend普通请求，此处声明了httpClient，此方法直接提取了响应内容
     public static String HttpSend(String url, Map<String,String> map) {
         UrlEncodedFormEntity urlEncodedFormEntity=null;
         //将map转化为urlEncodedFormEntity
@@ -107,9 +108,9 @@ public static  String getResponse(String url,String body)throws IOException{
 
             for (String key : keySet) {
                 nameValuePairList.add(new BasicNameValuePair(key, map.get(key)));
-
             }
         }
+
         try {
             urlEncodedFormEntity=new UrlEncodedFormEntity(nameValuePairList,"UTF-8");
         } catch (UnsupportedEncodingException e) {
@@ -257,6 +258,7 @@ public static void sendMail(String[] tos,File file) throws Exception {
         return dateString;
 
     }
+    //获取指定的日期
     public static String transNo(){
         DateFormat dateFormat=new SimpleDateFormat("YYYYMMddHHmmss");
         Date now=new Date();
@@ -279,6 +281,7 @@ public static void sendMail(String[] tos,File file) throws Exception {
 
 
     }
+
 //json值转换相关
     public static void getJsonArray ()throws Exception{
 
@@ -379,7 +382,7 @@ public static void sendMail(String[] tos,File file) throws Exception {
         String third=String.valueOf(getNum(1,9100)+10000).substring(1);
         return first+second+third;
     }
-    //获取邮箱
+    //获取随机邮箱
     public static String getEmail(int lMin,int lMax) {
         String base = "abcdefghijklmnopqrstuvwxyz0123456789";
         String[] email_suffix="@gmail.com,@yahoo.com,@msn.com,@hotmail.com,@aol.com,@ask.com,@live.com,@qq.com,@0355.net,@163.com,@163.net,@263.net,@3721.net,@yeah.net,@googlemail.com,@126.com,@sina.com,@sohu.com,@yahoo.com.cn".split(",");
@@ -437,5 +440,23 @@ public static void sendMail(String[] tos,File file) throws Exception {
         return jsonObject;
 
     }
+
+
+
+    //对象转为map
+    public static <T> Map<String, Object> beanToMap(T bean) {
+        Map<String, Object> map =  new HashMap<>();
+        if (bean != null) {
+            BeanMap beanMap = BeanMap.create(bean);
+            for (Object key : beanMap.keySet()) {
+                map.put(key + "", beanMap.get(key));
+            }
+        }
+        return map;
+    }
+
+
+
+
 	
 }

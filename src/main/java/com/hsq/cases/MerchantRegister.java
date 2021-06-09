@@ -32,7 +32,7 @@ public class MerchantRegister {
     public void merchantRegister() throws Exception{
         ReqInfo reqInfo=DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","商户进件-个人");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
-        jsonObject.put("bankCardNo","621082"+TestConfig.getRandom4(9)+"2");
+        jsonObject.put("bankCardNo","621082"+TestConfig.getRandom4(9)+"7");
         jsonObject.put("outMerchantNo", outMerchantNo);
         jsonObject.put("name",name);
         jsonObject.put("merchantName","个人消费户"+name);
@@ -100,7 +100,7 @@ public class MerchantRegister {
     public void merchantRegisterCommon() throws Exception{
         ReqInfo reqInfo= DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","商户进件-个人");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
-        jsonObject.put("bankCardNo","621082"+TestConfig.getRandom4(9)+"2");
+        jsonObject.put("bankCardNo","621082"+TestConfig.getRandom4(9)+"7");
         jsonObject.put("outMerchantNo", TestConfig.dateString());
         jsonObject.put("name",name);
         jsonObject.put("merchantName","个人普通户"+name);

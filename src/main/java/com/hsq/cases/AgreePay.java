@@ -91,13 +91,17 @@ public class AgreePay {
     }
 
 
-    @Test(description = "协议支付直接支付" ,dependsOnGroups = "bind",testName = "协议支付直接支付")
+   // @Test(description = "协议支付直接支付" ,dependsOnGroups = "bind",testName = "协议支付直接支付")
+    @Test(description = "协议支付直接支付" ,testName = "协议支付直接支付")
     public void AgreeDirectPay(){
         reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","协议支付直接支付");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("transNo",transNo);
         jsonObject.put("requestDate", TestConfig.dateString());
-        jsonObject.put("agreePayNo", agreePayNo);
+     //  jsonObject.put("agreePayNo", agreePayNo);
+        //协议支付可以直接成功的交易
+        jsonObject.put("agreePayNo","1632340150846163");
+
 
         //加密后的字符串
         String signContent= encAndDnc.encMessage(jsonObject.toString());
@@ -134,12 +138,18 @@ public class AgreePay {
         Assert.assertEquals(jsonObject1.get("success"),true);
     }
 
-    @Test(description = "协议支付分账" ,dependsOnMethods ="AgreeDirectPay",testName ="协议支付分账" )
+
+
+    //分账，只能向非消费户分账，消费户是不支持分账的
+   @Test(description = "协议支付分账" ,dependsOnMethods ="AgreeDirectPay",testName ="协议支付分账" )
+  //  @Test(description = "协议支付分账" , testName ="协议支付分账" )
     public void AgreeShare(){
         reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","协议支付分账");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("transNo",TestConfig.dateString());
         jsonObject.put("requestDate", TestConfig.dateString());
+        //向指定账户转账
+       // jsonObject.put("origTransNo","20210517163230");
         jsonObject.put("origTransNo",transNo);
 
         //加密后的字符串
