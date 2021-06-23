@@ -15,7 +15,7 @@ import java.util.Map;
 @Slf4j
 public class MerchantRegister {
 
-    EncAndDnc encAndDnc=new EncAndDnc();
+
     String name=TestConfig.getChineseName(1);
     Map map=TestConfig.getMap();
     String uniqueCode=null;
@@ -32,7 +32,7 @@ public class MerchantRegister {
     public void merchantRegister() throws Exception{
         ReqInfo reqInfo=DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","商户进件-个人");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
-        jsonObject.put("bankCardNo","621082"+TestConfig.getRandom4(9)+"2");
+        jsonObject.put("bankCardNo","621082"+TestConfig.getRandom4(9)+"7");
         jsonObject.put("outMerchantNo", outMerchantNo);
         jsonObject.put("name",name);
         jsonObject.put("merchantName","个人消费户"+name);
@@ -70,15 +70,13 @@ public class MerchantRegister {
     public void merchantRegisterConfirm()throws Exception{
       ReqInfo  reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","个人进件-开户确认");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
-
-
         jsonObject.put("uniqueCode",uniqueCode);
         jsonObject.put("outMerchantNo",outMerchantNo);
-
+      EncAndDnc  e2=new EncAndDnc();
 
         log.info(jsonObject.toString());
         //加密后的字符串
-        String signContent= encAndDnc.encMessage(jsonObject.toString());
+        String signContent= e2.encMessage(jsonObject.toString());
 
         reqInfo.setSignContent(signContent);
         map.put("method",reqInfo.getMethod());
@@ -88,7 +86,8 @@ public class MerchantRegister {
         //返回数据转换为json
         // JSONObject jsonObject1=JSONObject.parseObject(result);
         //请求结果进行解密
-        String res=encAndDnc.dencMessage(result);
+
+        String res=e2.dencMessage(result);
         //再将请求结果转换为json格式
         JSONObject jsonObject2= JSONObject.parseObject(res);
         log.info("响应明文结果"+res);
@@ -100,7 +99,7 @@ public class MerchantRegister {
     public void merchantRegisterCommon() throws Exception{
         ReqInfo reqInfo= DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","商户进件-个人");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
-        jsonObject.put("bankCardNo","621082"+TestConfig.getRandom4(9)+"2");
+        jsonObject.put("bankCardNo","621082"+TestConfig.getRandom4(9)+"7");
         jsonObject.put("outMerchantNo", TestConfig.dateString());
         jsonObject.put("name",name);
         jsonObject.put("merchantName","个人普通户"+name);
@@ -109,23 +108,23 @@ public class MerchantRegister {
         jsonObject.put("servicePhone","131"+TestConfig.getRandom4(8));
         //非钱包用户：2，钱包用户：1
         jsonObject.put("userType","2");
-
-
         log.info(jsonObject.toString());
+         EncAndDnc e3=new EncAndDnc();
         //加密后的字符串
-        String signContent= encAndDnc.encMessage(jsonObject.toString());
+        String signContent= e3.encMessage(jsonObject.toString());
 
         reqInfo.setSignContent(signContent);
         map.put("method",reqInfo.getMethod());
         map.put("signContent",signContent);
         //此处需要注意是代理商商户号，不是商户号
         map.put("agentMerchantNo","883007563082");
-        log.info(map.toString());
+        log.info("请求报文是：===="+map.toString());
         String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
         //返回数据转换为json
         // JSONObject jsonObject1=JSONObject.parseObject(result);
         //请求结果进行解密
-        String res=encAndDnc.dencMessage(result);
+        log.info("响应密文是：===="+result);
+        String res=e3.dencMessage(result);
         //再将请求结果转换为json格式
         JSONObject jsonObject2= JSONObject.parseObject(res);
         log.info("响应明文结果"+res);
@@ -143,10 +142,10 @@ public class MerchantRegister {
 
         jsonObject.put("outMerchantNo",outMerchantNo);
 
-
+       EncAndDnc e4=new EncAndDnc();
         log.info(jsonObject.toString());
         //加密后的字符串
-        String signContent= encAndDnc.encMessage(jsonObject.toString());
+        String signContent= e4.encMessage(jsonObject.toString());
 
         reqInfo.setSignContent(signContent);
         map.put("method",reqInfo.getMethod());
@@ -158,7 +157,8 @@ public class MerchantRegister {
         //返回数据转换为json
         // JSONObject jsonObject1=JSONObject.parseObject(result);
         //请求结果进行解密
-        String res=encAndDnc.dencMessage(result);
+
+        String res=e4.dencMessage(result);
         //再将请求结果转换为json格式
         JSONObject jsonObject2= JSONObject.parseObject(res);
         log.info("响应明文结果"+res);
@@ -179,8 +179,9 @@ public class MerchantRegister {
         jsonObject.put("email",TestConfig.getEmail(5,10));
         //非钱包用户：2，钱包用户：1
         log.info(jsonObject.toString());
+       EncAndDnc e5=new EncAndDnc();
         //加密后的字符串
-        String signContent= encAndDnc.encMessage(jsonObject.toString());
+        String signContent= e5.encMessage(jsonObject.toString());
 
         reqInfo.setSignContent(signContent);
         map.put("method",reqInfo.getMethod());
@@ -192,7 +193,8 @@ public class MerchantRegister {
         //返回数据转换为json
         // JSONObject jsonObject1=JSONObject.parseObject(result);
         //请求结果进行解密
-        String res=encAndDnc.dencMessage(result);
+
+        String res=e5.dencMessage(result);
         //再将请求结果转换为json格式
         JSONObject jsonObject2= JSONObject.parseObject(res);
         log.info("响应明文结果"+res);
@@ -216,7 +218,8 @@ public class MerchantRegister {
         jsonObject.put("selfEmployed","1");
         log.info(jsonObject.toString());
         //加密后的字符串
-        EncAndDnc e6=new EncAndDnc();
+       EncAndDnc e6=new EncAndDnc();
+        //EncAndDnc e6=new EncAndDnc();
         String signContent= e6.encMessage(jsonObject.toString());
 
         reqInfo.setSignContent(signContent);

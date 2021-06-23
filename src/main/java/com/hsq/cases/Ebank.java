@@ -15,7 +15,7 @@ import java.util.Map;
 public class Ebank {
     //基础参数
     ReqInfo reqInfo;
-    EncAndDnc encAndDnc=new EncAndDnc();
+    EncAndDnc encAndDnc;
     Map map=TestConfig.getMap();
     String transNo= TestConfig.dateString();
 
@@ -31,7 +31,7 @@ public class Ebank {
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("requestDate", TestConfig.dateString());
         jsonObject.put("transNo",transNo);
-
+        encAndDnc=new EncAndDnc();
         //加密后的字符串
         String signContent= encAndDnc.encMessage(jsonObject.toString());
         log.info("请求明文"+jsonObject.toString());
@@ -58,7 +58,7 @@ public class Ebank {
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("requestDate", TestConfig.dateString());
         jsonObject.put("transNo",transNo);
-
+        encAndDnc=new EncAndDnc();
         //加密后的字符串
         String signContent= encAndDnc.encMessage(jsonObject.toString());
         log.info("请求明文"+jsonObject.toString());
@@ -90,7 +90,7 @@ public class Ebank {
         reqInfo.setSignContent(signContent);
         map.put("method",reqInfo.getMethod());
         map.put("signContent",signContent);
-
+        encAndDnc=new EncAndDnc();
         String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
         //返回数据转换为json
         // JSONObject jsonObject1=JSONObject.parseObject(result);

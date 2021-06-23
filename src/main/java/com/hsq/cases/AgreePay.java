@@ -29,7 +29,7 @@ public class AgreePay {
     String agreePayNo=null;
     Map map=TestConfig.getMap();
     String transNo=TestConfig.dateString();
-    String transNo2=TestConfig.dateString();
+    String transNo2=TestConfig.dateString()+"55";
 
     //协议支付
     @BeforeClass
@@ -51,10 +51,11 @@ public class AgreePay {
         map.put("method",reqInfo.getMethod());
         map.put("signContent",signContent);
         String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
-        JSONObject jsonObject1= JSONObject.parseObject(result);
-
-        Assert.assertEquals(jsonObject1.get("success"),true);
-
+        //解密后的响应明文
+        String resultData= encAndDnc.dencMessage(result);
+        log.info("响应明文结果"+resultData);
+        JSONObject jsonObject3=JSONObject.parseObject(resultData);
+        Assert.assertEquals(jsonObject3.get("respMsg"),"交易成功");
         //获取唯一编码：
         String res=encAndDnc.dencMessage(result);
         JSONObject jsonObject2= JSONObject.parseObject(res);
@@ -92,12 +93,16 @@ public class AgreePay {
 
 
     @Test(description = "协议支付直接支付" ,dependsOnGroups = "bind",testName = "协议支付直接支付")
+  //  @Test(description = "协议支付直接支付" ,testName = "协议支付直接支付")
     public void AgreeDirectPay(){
         reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","协议支付直接支付");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("transNo",transNo);
         jsonObject.put("requestDate", TestConfig.dateString());
-        jsonObject.put("agreePayNo", agreePayNo);
+      jsonObject.put("agreePayNo", agreePayNo);
+        //协议支付可以直接成功的交易
+      //  jsonObject.put("agreePayNo","1632340150846163");
+
 
         //加密后的字符串
         String signContent= encAndDnc.encMessage(jsonObject.toString());
@@ -109,12 +114,15 @@ public class AgreePay {
         String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
         JSONObject jsonObject1= JSONObject.parseObject(result);
         log.info("响应明文结果"+encAndDnc.dencMessage(result));
-        Assert.assertEquals(jsonObject1.get("success"),true);
+        String resultData=encAndDnc.dencMessage(result);
+        JSONObject jsonObject3=JSONObject.parseObject(resultData);
+        log.info("响应信息是：-------"+jsonObject3.getString("respMsg"));
+        Assert.assertEquals(jsonObject3.get("respMsg"),"交易成功");
 
     }
 
 
-    @Test(description = "协议支付订单查询",testName = "协议支付订单查询")
+    @Test(description = "协议支付订单查询",testName = "协议支付订单查询",dependsOnMethods = "AgreeDirectPay")
     public void AgreePayQuery(){
         reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","协议支付订单查询");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
@@ -130,16 +138,27 @@ public class AgreePay {
         //获取请求结果，密文string
         String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
         JSONObject jsonObject1= JSONObject.parseObject(result);
-        log.info("响应明文结果"+encAndDnc.dencMessage(result));
-        Assert.assertEquals(jsonObject1.get("success"),true);
+        //解密后的响应明文
+       String resultData= encAndDnc.dencMessage(result);
+        log.info("响应明文结果"+resultData);
+        JSONObject jsonObject3=JSONObject.parseObject(resultData);
+        Assert.assertEquals(jsonObject3.get("respMsg"),"交易成功");
+
+
     }
 
-    @Test(description = "协议支付分账" ,dependsOnMethods ="AgreeDirectPay",testName ="协议支付分账" )
+
+
+    //分账，只能向非消费户分账，消费户是不支持分账的
+   @Test(description = "协议支付分账" ,dependsOnMethods ="AgreeDirectPay",testName ="协议支付分账" )
+  //  @Test(description = "协议支付分账" , testName ="协议支付分账" )
     public void AgreeShare(){
         reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","协议支付分账");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("transNo",TestConfig.dateString());
         jsonObject.put("requestDate", TestConfig.dateString());
+        //向指定账户转账
+       // jsonObject.put("origTransNo","20210517163230");
         jsonObject.put("origTransNo",transNo);
 
         //加密后的字符串
@@ -151,13 +170,20 @@ public class AgreePay {
         log.info("请求明文"+jsonObject.toString());
         //获取请求结果，密文string
         String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
-        JSONObject jsonObject1= JSONObject.parseObject(result);
-        log.info("响应明文结果"+encAndDnc.dencMessage(result));
-        Assert.assertEquals(jsonObject1.get("success"),true);
+
+       //解密后的响应明文
+       String resultData= encAndDnc.dencMessage(result);
+       log.info("响应明文结果"+resultData);
+       JSONObject jsonObject3=JSONObject.parseObject(resultData);
+       Assert.assertEquals(jsonObject3.get("respMsg"),"交易成功");
+
+
+
+
     }
 
     //含已分账的归集回来
-     @Test(description = "协议支付退款" ,dependsOnMethods = "AgreeDirectPay")
+     @Test(description = "协议支付退款" ,dependsOnMethods = {"AgreeDirectPay","AgreeShare"})
     public void AgreePayRefund(){
         reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","协议支付退款");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
@@ -173,9 +199,11 @@ public class AgreePay {
         map.put("signContent",signContent);
         log.info("请求明文"+map.toString());
         String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
-        JSONObject jsonObject1= JSONObject.parseObject(result);
-        log.info("响应明文结果"+encAndDnc.dencMessage(result));
-        Assert.assertEquals(jsonObject1.get("success"),true);
+         //解密后的响应明文
+         String resultData= encAndDnc.dencMessage(result);
+         log.info("响应明文结果"+resultData);
+         JSONObject jsonObject3=JSONObject.parseObject(resultData);
+         Assert.assertEquals(jsonObject3.get("respMsg"),"交易处理中，请稍后查询");
     }
 
 
@@ -197,9 +225,11 @@ public class AgreePay {
         map.put("signContent",signContent);
         log.info("请求明文"+map.toString());
         String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
-        JSONObject jsonObject1= JSONObject.parseObject(result);
-        log.info("响应明文结果"+encAndDnc.dencMessage(result));
-        Assert.assertEquals(jsonObject1.get("success"),true);
+        //解密后的响应明文
+        String resultData= encAndDnc.dencMessage(result);
+        log.info("响应明文结果"+resultData);
+        JSONObject jsonObject3=JSONObject.parseObject(resultData);
+        Assert.assertEquals(jsonObject3.get("respMsg"),"交易成功");
     }
     //协议支付含营销户退款
 
@@ -219,9 +249,11 @@ public class AgreePay {
         map.put("signContent",signContent);
         log.info("请求明文"+map.toString());
         String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
-        JSONObject jsonObject1= JSONObject.parseObject(result);
-        log.info("响应明文结果"+encAndDnc.dencMessage(result));
-        Assert.assertEquals(jsonObject1.get("success"),true);
+        //解密后的响应明文
+        String resultData= encAndDnc.dencMessage(result);
+        log.info("响应明文结果"+resultData);
+        JSONObject jsonObject3=JSONObject.parseObject(resultData);
+        Assert.assertEquals(jsonObject3.get("respMsg"),"交易处理中，请稍后查询");
     }
 
 }

@@ -49,7 +49,7 @@ public class PolymerizePay {
     public Object[][]getData1(){
         return new Object[][]{
                 {"ALI_NATIVE","支付宝主扫","交易处理中，请稍后查询"},
-                {"ALI_JSAPI","支付宝-生活号","交易失败"},
+                {"ALI_JSAPI","支付宝-生活号","系统繁忙，请稍后再试"},
                 {"ALI_APPLET","支付宝-小程序","交易处理中，请稍后查询"},
                 {"WECHAT_JSAPI","微信-公众号","交易处理中，请稍后查询"},
                 {"WECHAT_APPLET","微信-小程序","交易处理中，请稍后查询"},
@@ -149,5 +149,34 @@ public void aliPayMarket()throws Exception{
     //  System.out.println("响应明文结果"+encAndDnc.dencMessage(result));
 
 }
+
+
+//聚合支付跳转收银台
+    @Test(description = "聚合支付跳转收银台")
+    public void aliPayCashier()throws Exception{
+        ReqInfo reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","聚合支付跳转收银台");
+        JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
+        jsonObject.put("requestDate", TestConfig.dateString());
+        jsonObject.put("transNo",TestConfig.dateString());
+
+        encAndDnc=new EncAndDnc();
+        //加密后的字符串
+        String signContent= encAndDnc.encMessage(jsonObject.toString());
+        log.info("请求明文："+jsonObject.toString());
+        reqInfo.setSignContent(signContent);
+        map.put("method",reqInfo.getMethod());
+        map.put("signContent",signContent);
+        String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
+
+        //解密后的响应明文
+        String resultData= encAndDnc.dencMessage(result);
+        log.info("响应明文结果"+resultData);
+        JSONObject jsonObject3=JSONObject.parseObject(resultData);
+        Assert.assertEquals(jsonObject3.get("respMsg"),"等待用户扫码");
+
+
+
+
+    }
 
 }

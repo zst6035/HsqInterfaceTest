@@ -142,7 +142,8 @@
                 <version>2.7.1</version>
                 <configuration>
                     <!--打包时跳过测试，这样就不会打包失败了-->
-                    <skipTests>true</skipTests>
+                    <!--<skipTests>true</skipTests>-->
+                    <testFailureIgnore>true</testFailureIgnore>
                     <suiteXmlFiles>
                         <suiteXmlFile>
                             ./src/main/resources/testng.xml
@@ -173,12 +174,12 @@
                         </goals>
                         <configuration>
                             <includePluginDependencies>true</includePluginDependencies>
-                            <mainClass>test.SendMail</mainClass>
+                            <mainClass>com.hsq.tests.SendMail</mainClass>
                             <arguments>
                                 <argument>11</argument>
                                 <argument>22</argument>
                             </arguments>
-                            <classpathScope>compile</classpathScope>
+                            <!--<classpathScope>compile</classpathScope>-->
                         </configuration>
                     </execution>
                 </executions>
