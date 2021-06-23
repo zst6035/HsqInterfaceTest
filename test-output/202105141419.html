@@ -1,0 +1,3410 @@
+
+<!DOCTYPE html>
+<html>
+
+
+<head>
+	<meta charset='utf-8' /> 
+	<meta name='description' content='' />
+	<meta name='robots' content='noodp, noydir' />
+	<meta name='viewport' content='width=device-width, initial-scale=1' />
+	<meta id="timeStampFormat" name="timeStampFormat" content='MMM d, yyyy hh:mm:ss a'/>
+	
+	<link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+		<link href='http://extentreports.com/resx/dist/css/extent.css' type='text/css' rel='stylesheet' />
+	
+	<title>hsqapi_testreport</title>
+
+	<style type='text/css'>
+		.node.level-1  ul{ display:none;} .node.level-1.active ul{display:block;}
+	</style>
+</head>
+
+	<body class='extent standard default hide-overflow '>
+		<div id='theme-selector' alt='Click to toggle theme. To enable by default, use theme configuration.' title='Click to toggle theme. To enable by default, use theme configuration.'>
+			<span><i class='material-icons'>desktop_windows</i></span>
+		</div>
+
+<nav>
+	<div class="nav-wrapper">
+		<a href="#!" class="brand-logo blue darken-3">Extent</a>
+
+		<!-- slideout menu -->
+		<ul id='slide-out' class='side-nav fixed hide-on-med-and-down'>
+			<li class='waves-effect active'><a href='#!' view='test-view' onclick="configureView(0);chartsView('test');"><i class='material-icons'>dashboard</i></a></li>
+						<li class='waves-effect'><a href='#!' view='category-view' onclick="configureView(1)"><i class='material-icons'>label_outline</i></a></li>
+			<li class='waves-effect'><a href='#!' view='exception-view' onclick="configureView(2)"><i class='material-icons'>bug_report</i></a></li>
+			<li class='waves-effect'><a href='#!' onclick="configureView(-1);chartsView('dashboard');" view='dashboard-view'><i class='material-icons'>track_changes</i></i></a></li>
+		</ul>
+
+		<!-- report name -->
+		<span class='report-name'>hsqapi_testreport</span>
+		
+		<!-- report headline -->
+		<span class='report-headline'></span>
+
+		<!-- nav-right -->
+		<ul id='nav-mobile' class='right hide-on-med-and-down nav-right'>
+			<li>
+                <a href='#!'>
+                    <span class='label suite-start-time blue darken-3'>May 14, 2021 02:19:32 PM</span>
+				</a>
+			</li>
+			<li>
+                <a href='#!'>
+                    <span class='label blue darken-3'>v3.0.6</span>
+				</a>
+			</li>
+		</ul>
+	</div>
+</nav>
+
+		<!-- container -->
+		<div class='container'>
+
+<div id='test-view' class='view'>
+				
+	<section id='controls'>
+		<div class='controls grey lighten-4'>
+			<!-- test toggle -->
+			<div class='chip transparent'>
+				<a class='dropdown-button tests-toggle' data-activates='tests-toggle' data-constrainwidth='true' data-beloworigin='true' data-hover='true' href='#'>
+					<i class='material-icons'>warning</i> Status
+				</a>
+				<ul id='tests-toggle' class='dropdown-content'>
+											<li status='pass'><a href='#!'>Pass <i class='material-icons green-text'>check_circle</i></a></li>
+						<li status='fail'><a href='#!'>Fail <i class='material-icons red-text'>cancel</i></a></li>
+						<li status='skip'><a href='#!'>Skip <i class='material-icons cyan-text'>redo</i></a></li>
+					<li class='divider'></li>
+					<li status='clear' clear='true'><a href='#!'>Clear Filters <i class='material-icons'>clear</i></a></li>
+				</ul>
+			</div>
+			<!-- test toggle -->
+
+			<!-- category toggle -->
+			<div class='chip transparent'>
+				<a class='dropdown-button category-toggle' data-activates='category-toggle' data-constrainwidth='false' data-beloworigin='true' data-hover='true' href='#'>
+					<i class='material-icons'>local_offer</i> Category
+				</a>
+				<ul id='category-toggle' class='dropdown-content'>
+					<li><a href='#'>bind</a></li>
+					<li><a href='#'>alipay</a></li>
+					<li class='divider'></li>
+					<li class='clear'><a href='#!' clear='true'>Clear Filters</a></li>
+				</ul>
+			</div>
+			<!-- category toggle -->
+
+			<!-- clear filters -->
+			<div class='chip transparent hide'>
+				<a class='' id='clear-filters' alt='Clear Filters' title='Clear Filters'>
+					<i class='material-icons'>close</i> Clear
+				</a>
+			</div>
+			<!-- clear filters -->
+
+			<!-- enable dashboard -->
+			<div id='toggle-test-view-charts' class='chip transparent'>
+				<a class='pink-text' id='enable-dashboard' alt='Enable Dashboard' title='Enable Dashboard'>
+					<i class='material-icons'>track_changes</i> Dashboard
+				</a>
+			</div>
+			<!-- enable dashboard -->
+
+			<!-- search -->
+			<div class='chip transparent' alt='Search Tests' title='Search Tests'>
+				<a href="#" class='search-div'>
+					<i class='material-icons'>search</i> Search
+				</a>
+
+				<div class='input-field left hide'>
+					<input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+				</div>
+				
+			</div>
+			<!-- search -->
+		</div>
+	</section>
+
+
+<div id='test-view-charts' class='subview-full'>
+	<div id='charts-row' class='row nm-v nm-h'>
+		<div class='col s12 m6 l6 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Tests</div>
+				<div class='chart-box'>
+					<canvas id='parent-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='63.265%'><span class='strong'>31</span> test(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='24.49%'>12</span> test(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='12.245%'>6</span> others
+				</div>
+			</div>
+		</div>
+		
+		<div class='col s12 m6 l6 np-h'>
+			<div class='card-panel nm-v'>
+				<div class='left panel-name'>Steps</div>
+				<div class='chart-box'>
+					<canvas id='child-analysis' width='100' height='80'></canvas>
+				</div>
+				<div class='block text-small'>
+					<span class='tooltipped' data-position='top' data-tooltip='63.265%'><span class='strong'>31</span> step(s) passed</span>
+				</div>
+				<div class='block text-small'>
+					<span class='strong tooltipped' data-position='top' data-tooltip='24.49%'>12</span> step(s) failed, <span class='strong tooltipped' data-position='top' data-tooltip='12.245%'>6</span> others
+				</div>
+			</div>
+		</div>
+		
+	</div>
+</div>
+
+	<div class='subview-left left'>
+		
+		<div class='view-summary'>
+			<h5>Tests</h5>
+			<ul id='test-collection' class='test-collection'>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='1'>
+					<div class='test-heading'>
+						<span class='test-name'>商户进件-消费户个人</span>
+						<span class='test-time'>May 14, 2021 02:19:42 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:42 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:42 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+235ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'><pre>java.lang.NullPointerException
+	at com.hsq.utils.RsaUtil.hex2Bytes(RsaUtil.java:314)
+	at com.hsq.utils.RsaUtil.decryptByPublicKey(RsaUtil.java:276)
+	at com.hsq.utils.RsaUtil.decryptByPubCerText(RsaUtil.java:117)
+	at com.hsq.utils.EncAndDnc.dencMessage(EncAndDnc.java:31)
+	at com.hsq.cases.MerchantRegister.merchantRegister(MerchantRegister.java:54)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='2'>
+					<div class='test-heading'>
+						<span class='test-name'>商户进件-非消费户个人</span>
+						<span class='test-time'>May 14, 2021 02:19:42 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:42 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:42 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+0ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'><pre>com.alibaba.fastjson.JSONException: syntax error, pos 1, line 1, column 2c48b21f8d09420f9b45a495a78f745b306affbf8aacc3b80058a54ad0a3b367d374b0c20b5bdfffa43eaa629b4ee201b710767ada9034371aef45026440eca3335003aead54fb8764b64d65892cd5c4e299bc1e59b3581d9b4b361491e7931b84b42e282f21493119855b8a24a7f1a75648f5ee16237697b3fb83de6fdc37fac480137b2f5337d026eb3dd767c0e9ae6d6abe8786d22a2af0a93f75fe7c9fdcd62af7156081f911b0ab203c8055f91a8136495c85622d5a0bcd7a6b805e560d279c75ca0c8f4bd0e9972e07a102d115fb22564c5a194ede267c73ceff5572bbcbcb9181a887f907559c501fd1f1d367fd64b27c1c57118c4b332f9122b7bbac96efcde66dab25c3bd45a0d9863caffc5b4602d800c12cc9040df1529eb9be2bb214dbee1b93d1bc0c560367593bf7cb87c3774621550a2c9791783b35c2a024475cf1b66925df29745ea161410a22c7bbe5ae983705db3d7976d2d6f3fe119b04a06833bad3d432dc0463fda717cbfa5a3abcab16977b146a7c8f6d3714fcdbbd1cddee8bfbd809a0bef8e3be3dcb4d55256e24da12715e11b54d35449ae5c65e44e9098c489754e0466c33bd03ced6056786cb442e98fc48001701d1db24509400f449bdc9ed39f8433b625633fa670e63f9b92ae525a692e17d49a140cf7ec84b78e70bf2d459f6523464225126f6a93425c095b8e7dbb0b5a65a961d3a4b40eec5ab9007dc02773deba864c0ab0ddbd5b0e55ade4bec597a280b3b6af2d80fc3b6f48ddc44b4ce3e05d8940a216110ab00a9b370a3c29eb3a3d3557afa8e5bde9eb3b486bf57468d02bf202285d74b84d01496c0970876ba78c9e9f1986d3b6da946bd18b659a8a3d577a2328b881a2a2d2bb70df31a98d5185aa18c9879b0c501535803c8cc0a32c926683b49abf258c209ecaa7feec8fb8e68816fce58ac17203ef1d195f168c1505266e9000bca421e4f1960d6d60cd0e6c72fd0ec7d16baa37fedd36e9e3174ab5d9979a79479fccbd82005af94bda099d555f7c4ccbc1f281da84f6909c85e552264b519614bfc1e7abfaca4dd5961e8628bf09ed88b067d4a439b1d93ac1538732c8b380d67b3c0482e423f1227340f3a71acd02b213af9ec8cd3ce8ca4d197e985e843f9d6815ce12be2a88b9623ca03c65a33d06d709d85b5c3da9cdd884a7d8a911f89f5c2b1e6d6c95393a97b1ff738eb713fb50d8d0e8df4b1ee5e5f1903d93793eb232acfb95881ed5471ec09986a384b149e3c3d095a156102e8606038d88c46f4465d140b57bdd2811261c108df0000ae80251069034fb87e27fae5f59720dfe8df71ea785eb61442c1b638b6fe5efcae581f154cbb86d91457bad8f59f9b979ba5effb33cc5aaecb0b87df9df12ffe9943a727d77c277262ccf93904275d7091ab60f582676bff1aafa7122dc84f2e964cab1a2aff5959e902f50bc5dd181f6b39abf4066c14543f26257f0a190319f5e6ae9ea6993b2fc9a276715a108f196b495e8057ab15e42b5e01fd3a77a4cb7a45fa8538e7a1d36660f33f08858a1a0dd78eb37cdaef719f3ea3aa288ac05937c6a83443e113e5194c02fedf0484e0b571ca369a06b50872fc1d15f596886c53f5e9e7e8768dd42a6586124639c71e6cd4abae4f0c6b4d9327135fc78c2634847bbcbdec1e1be54f6e5711cae8dca411cf9049a97c93aa1498dae8c9f9b5120eba1074e94cdea5ed478128f62ec2b4e134b6b7eac6fa9c0b5666466dd6cbd139f986189144cf3272a24843e5d015946af99e981f6497ab96e955640bc210f8f931d3a90df3d76c1846588445e12d940fc111ff99ccd057b82cfadf72f58a27433a59eb7755690248f03855248eba48df0600ddb4ab5250510ee435e692f9137fff7990af1b77fa24ce55ae2b235babe390b136381d750357c3a4f3123b23e17f922d5f93e6117eb2a1aba117fca45f9e7d1af3a812d80e22834118f8adf12561183a06f385836d4abc70606d076fce569e19ff4e859070a4a2ec1f92328730b2d9afca6b1ecc6d8daaaa98ef6904423ece60825f36fccceb6b2b13a6a0b5ab2217baf77b210174b91bb7e2072656dd33fa9101116debf164e05e6e4253e851221835a02dc885154d72673fa14f7f9802659cf297846ad7a6e8598a9b143925a988026d795dcba3b7971b12e9ab7a041bedd098d9cf01cf6124bbf63c2278c89d8ff98af532bb117dddd6a1e9c304c7db17c3f2a3056aac76d31e8b75500cfe2ec31705552f619fa4e16706b9cbc26a303f28c1222fe268be82c8d8041a71c9eb701929eec94a458ded104f2ed2d89fffb5808004dc31af59f409bd2e383aee1cc259ecdfa4bdca671b16bd112792498cd097117ef44dcd73cf2845b85713f9aadcd95ff39250f7fa464fde6bd265df190454a15127e6143300a64f5c264446a7c619455cc811619d140b9c7188cb7643edc04eadf6729bbdd2b80ff88dfed07ef1b5d8bf5bc393a8d49bf4151de054948113de5166bb2a2adc9c35a98e29817a1c8f03dd088faaaf1bf9a376779bc6799de1d6629a3dd4c13461c702cca3251535cdbcf3497ea33fa9fb379f9e779be1e78f0a4d54702528ca3552a1bc9932b2bb057955f68feddc76ee6a56de9e3b04e8b46336071eae014999e051a64f7722fe2cc2a03da147848e99bf5229882f12544d84f2d8b938ba0a290646bb3351f687424fe4c810fb7253b19a93d930f7bc15809ac8d2d6522b89a9bf30d150060a451f5b0459a4b93e9924eb41291f41f4fae9fb31db8b131a0379ab0aaac34feaaf7ff62680389f96da0669d57dea89831d309d982fd747d5173f3a13ee34d685ad9fd9077ba9912a74828fbd4940e5f7d31b96293c3c50acaeb0e90170bd4031078a966b4dfea5c13edbe4da3d68d9f4095415e4e4753358938e16298910acb4fd7e2b07875a1e571b852d39ef38d969027f90ebb5cdf79429b223415d7d7da74c012345d976f6325a82777f44d9912fbbe4cf2d1c668fa63a96c028fcb2a03d1958267fcc3eee84355f6ad6c21f554460ea58d6fb78807e156bd9d9e0164517f8a7bdb817c2f7f3a7234110b80547ce47c28f1c9128126528fde36e434568b801bc9800d7813023b207773e00c6d1dffe16125aa372e5618edf562d3deff8297344c6b59432661965acf0b7440199bb81025e6c6f07f7c0f0ff20e2381c226cc1cc693cc5c02f411a36de6aedbb64786c2dbcb01b9380c85174ca475791faa03
+	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1481)
+	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1367)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:183)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:193)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
+	at com.alibaba.fastjson.JSON.parseObject(JSON.java:254)
+	at com.hsq.cases.MerchantRegister.merchantRegisterCommon(MerchantRegister.java:99)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='3'>
+					<div class='test-heading'>
+						<span class='test-name'>商户进件-个体工商户</span>
+						<span class='test-time'>May 14, 2021 02:19:46 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:46 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:46 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+0ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'><pre>com.alibaba.fastjson.JSONException: syntax error, pos 1, line 1, column 2ec00c1366b2bb18447e4fa1b798e8efcf521c4a11097966ba85a64ab245059bc3ad36cb55e6fa0f66c9409a14b1522d206367487bdb5403169bb7ebe170e4f809e82d8d8640de251eba306d81f4c5e7ad72fb95aea8e03c781a33be711e027591cc79741842b45c86225252b5392773117d54b88fd235ba6fa7396541653acbcce64d94533436b95fa5e1ac7f3a70c5d9f3d9976ba41174da1fcd86dfcadd34f3e3457da8d46a534c53847cc4abe21116dab2f8254a1de804334b42a41c02bcdc86b40bf0e1c255e255a8c8028ca2bfea0280f8211edfc101ca1fc06ab13c44df35a116b0e7bcd3e2fa061b5e9af28ce6e4c98a36a1590c588859a784c446cca02598778cac7b1d46f3e9a9827ac281f2eae7875c2cb896bde0cde538911990743b0c909b73487bf027ad8a68277118a86a50c9899781ea968978c5e01770d6a2a6028df1b053e2e8a677441f47e47ab267612866d732a0f0b64b0003f7be48015191a964346760bcb765eaf363e9e386eeacb9e283eab0fcf8f6e0040b3f9ae2ace7332e2569137bc2f45a1512a6f3eb4c5e5e86a7f37444f15c09cacd1003aa7e589e135ed22b8b9a6deff6cfd7bc367798dc78f9b09e46021bebe4115096aace41d9581aed9b79a75c68a62d406e95ee9675383af59ac0ef99d820dccd1ca583788ad897c238f4763b39533ab05f330326dd902957a4fc18ee3551171c7a3b00ce784a8f7652b2eac386ee32f79f4aeef8131657fd4c7b47bf40fbac359a0f97cb89f2487d191258947c7ffd6d1203f7f116e6628847ba57deb0e92a89b17bd9608af1c0dd4bbfac50d677dc8eb22d39e6bdcfcdfbf5ea3f4f2113b5e535437532c0f6b58de001ce8511b759344bc683f78797b9a073e761c9720a0fc487709e1cb8084038dcbcd4f103c359b06c2aa0a9dd63dedb3c09ed42b5a899fa673a220de465c2f49068940e1903a329e041e8fb2ece40586d0e1945d93224a88576411c53ad4901d504869545b2cbf80519df01a7d54eabd903e8c0d34d74c8af2bfe21d6345bfdd3c995471daf6d0ba5b5f4e89c3d451508a9810b08236619954d8fe0c7caafa145046ab5a353f6802c16fbe638e902cad168ee87cfede5372ac37cc72f7cb056ffbead6c226a151e3bf7d485212eff66e2eabae1d6bb2cfc12f0792285e5fc7696dd0f1764d968751357d94e29628ae39c9623f911f7441814e44eb21fe569a731a1fff5ed275017dca10a4ae6a1902ab047e447fd8b2194c17dfea22d74f2a24b9862b560997405d278a64a238c8a8500c053f4b8c75bf67720407ae56a6aee5dd1d2d998cdc4011f5845da6fab08074cedd180b6d47960004adcc69559ae2b145ad5171431b8c346248409d4759e460c442557db1648aafe14ef1ba8d1c44cda36e8289a76ebd2846ca356835bda146a21174aec3b60ff2e06cf000f235fac8dce9e45f514359c8927c1d79d51b1b6ce7e048ae75cd1ce0e907342a7bdca624129c4e0b5855f374db0b0ede7c1d535070bd6142b2518e4a3d27874d232abd5e4b189a1cc08871b7897b428c48969cefb8702e2b12c98f5122ba352b5d10f8026b1490c241cfff0773512261b5c8f9108d7b8bc8068c23a84a26fdb7c9ae555e0e81cfa3c96a23298eb4e21ac63aa958ab66a6a04447dcebc77a45bdc2b2231367a95c9a1aed87a7880221ba4d48791bf7516cfb5027b6f491ddb5bc300b0bae2d333f64b3093a65b2f9ab70e06b71fd24b6400ad7e8f7f41fd86a482495b8f677958288c69db8cfe1bccb3ad49acc8ffe729c5aa100e5e164822b99330f2630fcaf87abc6cd6a3d2655c43dd964567f9af9d5be65fdad659e1c231fbb812cb55cd1baef727f4821ea0c4b82441eb220d66f9fa5dd18911ab77bdd2f8a2d55c05b45630a4ae587ea48551d3ac76e774764c002c22dc44a6d9a2e9f1ee39c7fe01a4d43434fe8a4a37592f1e10861afd156c16a1706651a8f4f924a84ef033446df7c1ad3ce62882779953fb3b5280cdbc3c0fcf51efa4ca5433acd522cf7d0b1a23bec042ed1ee0bc44630a080b6b686403b11a4e7bcf96b5c47cd1387d36be54a67944d7d2741f090370a10d37a06383283c655d121a8333366517104ff033b0305d57ab3b17db479828f35bac23f108611a611a516868e885322c3a28191c501d7bc34f2b56a48addacba682fbcdf75449357f5a7df1da0a0fdbd3ebe2afb2b1d37a628444360dfc9a4009ae8f76a8019c8edd64fa1e7317d61c6bc13a935bf49dbdb57cd48f9f5631ed330ab14e2abf1f9f1ce111a988cc6e15cbaa30b121bb26f309ec98adc03983e9ece7372db2ddbbe25ed7cca730b325ad6e7bfdf6f5d2993d07cceefcd6fd998bccd5d4a862a77559794578e4d58f040b17efd00b190985d8dafb7f8a726044d364b9d22b96a1de292b8d28d899b429f8cfc596348cc9ee537ea97fffa1a9264c2345ca23c233ea8ab3094c69492670958469ea4b86abec34b78806fdc4cb7d22e86778e5a2261b3af28e570aa5300679606c6b563b66a375a8d93a614565aa5c241b085e7e75cde38a7a1267cc6c45fcfd943892dd59952b52e439e763defe8eaa4a9fe548b39a4104673ab598f8a36373d4c30a91af3ff6ec6d3f4aa5678c0968e4e6e6740b00f98f2455fc0e190fc411d7a1c7a1a1a9de14458120f1e6421fc1ea536241f853d2f1a17002a05c1320c6808caa3e28aac143df1629d59d2a45eafe948107cf4daad5879f72617ef19bbc72ed2c8e4067c651b8e72fe8a6d3c951215adad687a02d2f94ab6a3eeb87c83819cb70ba0090912db5dbe47c4c299c2fec6aca4c75925ae78a32583361445c01d81c5363476fe35544c31eae64961a58e08eeaae28c9761e82ca22e514c47ef58425d2f4c4ba521d46b8096e80f36edeb51fdc709c70da9e51674ce8dfc27415f3ae892e1f9e2da9386b5c868046907db80035df632fd7d162e94f872366202946050c80e21d420f8e9b7df13fa6b57111fe0ee5c5421ee6b1ba01b8a5d72f7c1cdf3bd12ae63015ed9c58cf2f839205904b08e20f083228afe12258c303051307e69fcc56ca43e82f4585a127d1ccc23f8e2ab8cda5851c630eca4dbeefaaf77ee046bc841692155e171bb2b6cd6a3e6ede6174c7e6ce724ab70c3d1b134913d844c89ab1b7b024e7b07043d39cd0b82b7a24a9b07e6c150cda90ad3e0f0d75a47fa9352d54aa7b1d88069ebe3b9049821c254c638344797aae34eb7e9b6adca886c3fad61bf3e6a0fa1298baae8e8719dd20146079a1c2629a3849851260acb6646ccc3e50e31c9373ae451857e4d7d24a3592a33c215dd1ba2cd0c4b5ffbfb8cd638efd287c5bc81a31a6e250b0540eed3b884ca10141cd865ea31b9554e2d0d3c4db21b66a2693c285694d3488d427c86091dc417bed9b46ac3bba72c6be32818d4e5c2b27e8f9fd541438e5caa8c747558523b107f4663bbb65c3a1715b9bad03a2c1706fef464c5006f8c362f3e6079128e830b0ff7532c354cdc847975a546db7b200b46e529e5ac28bb273c9f969b58c9dae9489bd352e0cafa14aedd2bf0491ae89dcdaddd90924da2a726e20eaa33133d1909dc586b5c5413d451b7da62d044d0f57d042046482826c6001acaa12fb4bb48d97ae47f06f042e23a5063890e833ebf5d4c261c58d6f47a681d5811c74f06357984236b520887e8e388494d8a90d1c1824b5567839f55ab12127d10fecba1c33e95334a53a2bb5459bd4d9ba2ba8c9e561df9cd6786c53694ed6920b23c20f5987222ffba868e0471f8c6334f9260c0c4fd4e15907a2aac10d3bdf9d04ecd9836cbee89fe3f441c3f0b1aa2e1b658f52d49d235ae9e918eb86ceb8d383daab02b188d31d2932c8f568844db2bfd9778394d537f9c24aa865ea3c89da7cf55239dcec106122613c553f72a1d2917137ae996fc4a6c8bd742887a3cddc893f941967a84c096a4813b227832fdebfa8179efc599dbd3bcd0e3296ec8810a7b00b5c0cfc667b63e18d9f65565d7360e3546b04ec733687fbcd08e8a088a981ecd18efcef5e2dc2cdfeedd74ca14ac93966051588c1f0de6b15d818a785dedc581565751980309f111f58379930e6ca157a0660ada1b3db399e6cc78fd01fc2323445809a32e8cb0b11ae9fb7123a54ede0668b43f4cf983b438bc29817b3a676dfed1a60bb45475b3430b7d31b0a756c32e5fc4a4eb96b73eb7048600538a806d2f16fb0d886f30e654e4ec03a7f95f607818652463a85bb1567f8ad47037f720b424450123ae4d3e38c0b1d7eba96feaf8ca49e9b0e2e348524e7b4a3159d0e51553608a6c59ccc
+	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1481)
+	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1367)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:183)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:193)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
+	at com.alibaba.fastjson.JSON.parseObject(JSON.java:254)
+	at com.hsq.cases.MerchantRegister.merchantRegisterPersonCompany(MerchantRegister.java:204)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='4'>
+					<div class='test-heading'>
+						<span class='test-name'>微信公众号下单</span>
+						<span class='test-time'>May 14, 2021 02:19:47 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:47 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:47 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+1ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'><pre>com.alibaba.fastjson.JSONException: syntax error, pos 1, line 1, column 2e83f11eb680a9d8bdeab21dab63c3d4e6a85d5988d722686326a03c09c7496d2c51f495ba3a8af8b73616e255d05bda6813ff39755eec865dc91ebf7912c993cec3911ebf0ca458118054ef8aa846dbbba79596ef5c35cd7bb06ab2a88ed80d590afa0faf4d7c2d0aa858222b55f49cde39074dc1b1d788afb65c275ec9b42198b972122dbaf114b5fff23edbec2ed9409b39a59b8c5180b554cedb4eed59150e67ddc3b23e2a5a84d969b88e202aa0021919649dbe554c77b54d7e0602bfabc89a12af3290599f05d30d10b8374c7d4c414cc18cab666b6618c73f3b5760c3c7318c03f9d3fd86e36e10d4d4bff07d8f4b06cabcac1ebaa41d5005a403fff071b1c90e8fb4d3f409eceb6b8c98fab1d02cfe56d26385da37bc3522d9f4b511522cd0dc78934bcbcb6b0e1969c59a9ae519e9084745b566370fc0f4fdf5907b89f6f8aec5d99939cf5d75833e0fcf01f6e36f4a522348078bd1af75f65379d1c67155138e1071a3480178c5fc2dcc3af9d73187cd88bd1bb8a3d4f9ec0afad44818af8fad61f663caf3980a5f2b2781b87c6e24890000b9d7f6ea169df3fa76efdee6f618dfdda769c733a473c22abe673c0fe6b3e9edebc3c5e9bb47c4f3d6952c0de978e78143a4b730dff4312c9fb890a58145b15e941684ef6b5334f2fb21fa08c8b59f7b9138b350aba692b26f3b47c4260ac9b07b865ecd94dfa010062b4699368156777fbb5ea19c423f0f5d6e374136ff5e95777f5056671fc618a45efe389f8f4cdc22f2206c46abc2b9a078dc9f4710ecc5af27a7311b28fa15a61a3a863ca5820215322742bbdd6e75e59d0fee5b0e983356274fe94935db6f8271bddf8823cb2085c40d6693192c7434e430f9954e91770a06c32daf035c1abbe7850aaa58331409838ae80ee945ef6dacad021688465ae2d546d9a15b9fc2ddab81ca9125edf37210b8a3e1cf5f490caea0c7f53409a0887d95231e15fa8cc624925e0f6f72a9e8235769f41d5218e91aced1764a5b488c93f8bcfcc720d00e099bc748ffb002285cbc99ac059fc519ad1d529abc30262f6ce9cb86ed2382d44
+	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1481)
+	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1367)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:183)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:193)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
+	at com.alibaba.fastjson.JSON.parseObject(JSON.java:254)
+	at com.hsq.cases.PolymerizePay.WeChatJS(PolymerizePay.java:198)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='5'>
+					<div class='test-heading'>
+						<span class='test-name'>聚合支付支付宝主扫含营销户</span>
+						<span class='test-time'>May 14, 2021 02:19:51 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:51 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:51 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+1ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'><pre>com.alibaba.fastjson.JSONException: not close json text, token : error
+	at com.alibaba.fastjson.parser.DefaultJSONParser.close(DefaultJSONParser.java:1527)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:187)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:193)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
+	at com.alibaba.fastjson.JSON.parseObject(JSON.java:254)
+	at com.hsq.cases.PolymerizePay.aliPayMarket(PolymerizePay.java:158)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='6'>
+					<div class='test-heading'>
+						<span class='test-name'>门店企业报备</span>
+						<span class='test-time'>May 14, 2021 02:19:51 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:51 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:52 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+209ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'><pre>java.lang.NullPointerException
+	at com.hsq.utils.RsaUtil.hex2Bytes(RsaUtil.java:314)
+	at com.hsq.utils.RsaUtil.decryptByPublicKey(RsaUtil.java:276)
+	at com.hsq.utils.RsaUtil.decryptByPubCerText(RsaUtil.java:117)
+	at com.hsq.utils.EncAndDnc.dencMessage(EncAndDnc.java:31)
+	at com.hsq.cases.StoreRegister.CompanyRegister(StoreRegister.java:91)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='7'>
+					<div class='test-heading'>
+						<span class='test-name'>门店个人报备</span>
+						<span class='test-time'>May 14, 2021 02:19:52 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:52 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:52 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+206ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'><pre>java.lang.NullPointerException
+	at com.hsq.utils.RsaUtil.hex2Bytes(RsaUtil.java:314)
+	at com.hsq.utils.RsaUtil.decryptByPublicKey(RsaUtil.java:276)
+	at com.hsq.utils.RsaUtil.decryptByPubCerText(RsaUtil.java:117)
+	at com.hsq.utils.EncAndDnc.dencMessage(EncAndDnc.java:31)
+	at com.hsq.cases.StoreRegister.personalRegister(StoreRegister.java:115)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='8'>
+					<div class='test-heading'>
+						<span class='test-name'>代理商报备结果查询</span>
+						<span class='test-time'>May 14, 2021 02:19:53 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:53 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:53 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+1ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'><pre>com.alibaba.fastjson.JSONException: syntax error, pos 1, line 1, column 2c8ea1168f7282051f12983834ed3f6973b244fc730a3a493e689ae3ab94c55e8bf7c45e70376fcf7bed589025f43d7136dd1ceb43dd16b0d41cbe050d6ed5c7c0419f1e9f732aab6922656ff6caea7ba9e4462ed9cb62e8efb80572b8ed594bd66a5e6f9ad03d02edd1f8cb2b9a62ac3fabf90cd2a2f486d231186d0175e3e30
+	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1481)
+	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1367)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:183)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:193)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
+	at com.alibaba.fastjson.JSON.parseObject(JSON.java:254)
+	at com.hsq.cases.AgentRegister.AgentRegisterResult(AgentRegister.java:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='9'>
+					<div class='test-heading'>
+						<span class='test-name'>网银订单查询</span>
+						<span class='test-time'>May 14, 2021 02:19:55 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+1ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'><pre>org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+### Cause: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:150)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:77)
+	at com.hsq.cases.Ebank.eBankQuery(Ebank.java:57)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+Caused by: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+	at org.apache.ibatis.executor.BaseExecutor.createCacheKey(BaseExecutor.java:197)
+	at org.apache.ibatis.executor.CachingExecutor.createCacheKey(CachingExecutor.java:146)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:82)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148)
+	... 27 more
+</pre></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='10'>
+					<div class='test-heading'>
+						<span class='test-name'>网银分账</span>
+						<span class='test-time'>May 14, 2021 02:19:55 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+0ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'><pre>org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+### Cause: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:150)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:77)
+	at com.hsq.cases.Ebank.eBankShare(Ebank.java:82)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+Caused by: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+	at org.apache.ibatis.executor.BaseExecutor.createCacheKey(BaseExecutor.java:197)
+	at org.apache.ibatis.executor.CachingExecutor.createCacheKey(CachingExecutor.java:146)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:82)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148)
+	... 27 more
+</pre></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='11'>
+					<div class='test-heading'>
+						<span class='test-name'>协议支付直接支付</span>
+						<span class='test-time'>May 14, 2021 02:19:55 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+0ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'><pre>org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+### Cause: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:150)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:77)
+	at com.hsq.cases.AgreePay.AgreeDirectPay(AgreePay.java:96)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+Caused by: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+	at org.apache.ibatis.executor.BaseExecutor.createCacheKey(BaseExecutor.java:197)
+	at org.apache.ibatis.executor.CachingExecutor.createCacheKey(CachingExecutor.java:146)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:82)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148)
+	... 27 more
+</pre></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  fail' status='fail' bdd='false' test-id='12'>
+					<div class='test-heading'>
+						<span class='test-name'>协议支付含营销户</span>
+						<span class='test-time'>May 14, 2021 02:19:55 PM</span>
+						<span class='test-status right fail'>fail</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+0ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='fail'>
+					<td class='status fail' title='fail' alt='fail'><i class='material-icons'>cancel</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'><pre>org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+### Cause: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:150)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:77)
+	at com.hsq.cases.AgreePay.AgreeDirectPayIncludeMarketing(AgreePay.java:186)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+Caused by: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+	at org.apache.ibatis.executor.BaseExecutor.createCacheKey(BaseExecutor.java:197)
+	at org.apache.ibatis.executor.CachingExecutor.createCacheKey(CachingExecutor.java:146)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:82)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148)
+	... 27 more
+</pre></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='13'>
+					<div class='test-heading'>
+						<span class='test-name'>消费户进件结果查询</span>
+						<span class='test-time'>May 14, 2021 02:19:55 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+1ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='skip'>
+					<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'><pre>java.lang.Throwable: Method MerchantRegister.merchantRegisterQuery()[pri:0, instance:com.hsq.cases.MerchantRegister@27f981c6] depends on not successfully finished methods
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1068)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='14'>
+					<div class='test-heading'>
+						<span class='test-name'>开户确认</span>
+						<span class='test-time'>May 14, 2021 02:19:55 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+0ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='skip'>
+					<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'><pre>java.lang.Throwable: Method MerchantRegister.merchantRegisterConfirm()[pri:0, instance:com.hsq.cases.MerchantRegister@27f981c6] depends on not successfully finished methods
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1068)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='15'>
+					<div class='test-heading'>
+						<span class='test-name'>门店报备结果查询</span>
+						<span class='test-time'>May 14, 2021 02:19:55 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+0ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='skip'>
+					<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'><pre>java.lang.Throwable: Method StoreRegister.RegisterResult()[pri:0, instance:com.hsq.cases.StoreRegister@1151e434] depends on not successfully finished methods
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1068)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='16'>
+					<div class='test-heading'>
+						<span class='test-name'>协议支付退款</span>
+						<span class='test-time'>May 14, 2021 02:19:55 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+0ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='skip'>
+					<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'><pre>java.lang.Throwable: Method AgreePay.AgreePayRefund()[pri:0, instance:com.hsq.cases.AgreePay@201a4587] depends on not successfully finished methods
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1068)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='17'>
+					<div class='test-heading'>
+						<span class='test-name'>协议支付分账</span>
+						<span class='test-time'>May 14, 2021 02:19:55 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+0ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='skip'>
+					<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'><pre>java.lang.Throwable: Method AgreePay.AgreeShare()[pri:0, instance:com.hsq.cases.AgreePay@201a4587] depends on not successfully finished methods
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1068)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  skip' status='skip' bdd='false' test-id='18'>
+					<div class='test-heading'>
+						<span class='test-name'>协议支付含营销户退款</span>
+						<span class='test-time'>May 14, 2021 02:19:55 PM</span>
+						<span class='test-status right skip'>skip</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+0ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='skip'>
+					<td class='status skip' title='skip' alt='skip'><i class='material-icons'>redo</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'><pre>java.lang.Throwable: Method AgreePay.AgreePayRefundMarketing()[pri:0, instance:com.hsq.cases.AgreePay@201a4587] depends on not successfully finished methods
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1068)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='19'>
+					<div class='test-heading'>
+						<span class='test-name'>代理商报备企业平台商</span>
+						<span class='test-time'>May 14, 2021 02:19:32 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:32 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:36 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 4s+619ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='20'>
+					<div class='test-heading'>
+						<span class='test-name'>代理商报备个体工商户</span>
+						<span class='test-time'>May 14, 2021 02:19:36 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:36 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:37 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+514ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='21'>
+					<div class='test-heading'>
+						<span class='test-name'>代理商报备自然人商户</span>
+						<span class='test-time'>May 14, 2021 02:19:37 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:37 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:37 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+469ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='22'>
+					<div class='test-heading'>
+						<span class='test-name'>代理商报备结果查询2</span>
+						<span class='test-time'>May 14, 2021 02:19:37 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:37 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:38 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+275ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='23'>
+					<div class='test-heading'>
+						<span class='test-name'>协议支付预绑卡</span>
+						<span class='test-time'>May 14, 2021 02:19:38 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:38 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:38 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+878ms</span>
+</div>
+	<div class='test-attributes'>
+			<div class='category-list'>
+				<span class='category label white-text'>bind</span>
+			</div>
+	</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='24'>
+					<div class='test-heading'>
+						<span class='test-name'>协议支付订单查询</span>
+						<span class='test-time'>May 14, 2021 02:19:38 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:38 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:39 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+234ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='25'>
+					<div class='test-heading'>
+						<span class='test-name'>门店余额查询</span>
+						<span class='test-time'>May 14, 2021 02:19:39 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:39 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:40 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+790ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='26'>
+					<div class='test-heading'>
+						<span class='test-name'>门店账户明细查询</span>
+						<span class='test-time'>May 14, 2021 02:19:40 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:40 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:40 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+450ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='27'>
+					<div class='test-heading'>
+						<span class='test-name'>门店充值</span>
+						<span class='test-time'>May 14, 2021 02:19:40 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:40 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:41 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+780ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='28'>
+					<div class='test-heading'>
+						<span class='test-name'>门店提现</span>
+						<span class='test-time'>May 14, 2021 02:19:41 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:41 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:41 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+689ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='29'>
+					<div class='test-heading'>
+						<span class='test-name'>门店提现订单查询</span>
+						<span class='test-time'>May 14, 2021 02:19:41 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:41 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:42 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+237ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='30'>
+					<div class='test-heading'>
+						<span class='test-name'>网银支付预下单</span>
+						<span class='test-time'>May 14, 2021 02:19:42 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:42 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:42 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+530ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='31'>
+					<div class='test-heading'>
+						<span class='test-name'>商户进件-企业</span>
+						<span class='test-time'>May 14, 2021 02:19:42 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:42 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:46 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 3s+654ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='32'>
+					<div class='test-heading'>
+						<span class='test-name'>聚合2.0All</span>
+						<span class='test-time'>May 14, 2021 02:19:46 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:46 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:46 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+219ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='33'>
+					<div class='test-heading'>
+						<span class='test-name'>微信小程序下单</span>
+						<span class='test-time'>May 14, 2021 02:19:46 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:46 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:47 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+434ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='34'>
+					<div class='test-heading'>
+						<span class='test-name'>ALI_NATIVE支付宝主扫交易处理中，请稍后查询</span>
+						<span class='test-time'>May 14, 2021 02:19:47 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:47 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:48 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+940ms</span>
+</div>
+	<div class='test-attributes'>
+			<div class='category-list'>
+				<span class='category label white-text'>alipay</span>
+			</div>
+	</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='35'>
+					<div class='test-heading'>
+						<span class='test-name'>ALI_JSAPI支付宝-生活号交易失败</span>
+						<span class='test-time'>May 14, 2021 02:19:48 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:48 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:48 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+506ms</span>
+</div>
+	<div class='test-attributes'>
+			<div class='category-list'>
+				<span class='category label white-text'>alipay</span>
+			</div>
+	</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='36'>
+					<div class='test-heading'>
+						<span class='test-name'>ALI_APPLET支付宝-小程序交易处理中，请稍后查询</span>
+						<span class='test-time'>May 14, 2021 02:19:48 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:48 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:49 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+691ms</span>
+</div>
+	<div class='test-attributes'>
+			<div class='category-list'>
+				<span class='category label white-text'>alipay</span>
+			</div>
+	</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='37'>
+					<div class='test-heading'>
+						<span class='test-name'>WECHAT_JSAPI微信-公众号交易处理中，请稍后查询</span>
+						<span class='test-time'>May 14, 2021 02:19:49 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:49 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:49 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+405ms</span>
+</div>
+	<div class='test-attributes'>
+			<div class='category-list'>
+				<span class='category label white-text'>alipay</span>
+			</div>
+	</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='38'>
+					<div class='test-heading'>
+						<span class='test-name'>WECHAT_APPLET微信-小程序交易处理中，请稍后查询</span>
+						<span class='test-time'>May 14, 2021 02:19:49 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:49 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:50 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+487ms</span>
+</div>
+	<div class='test-attributes'>
+			<div class='category-list'>
+				<span class='category label white-text'>alipay</span>
+			</div>
+	</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='39'>
+					<div class='test-heading'>
+						<span class='test-name'>POLYMERIZE_CODE聚合码1.0等待用户扫码</span>
+						<span class='test-time'>May 14, 2021 02:19:50 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:50 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:50 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+288ms</span>
+</div>
+	<div class='test-attributes'>
+			<div class='category-list'>
+				<span class='category label white-text'>alipay</span>
+			</div>
+	</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='40'>
+					<div class='test-heading'>
+						<span class='test-name'>DYNAMIC_ALL聚合码2.0-all等待用户扫码</span>
+						<span class='test-time'>May 14, 2021 02:19:50 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:50 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:50 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+302ms</span>
+</div>
+	<div class='test-attributes'>
+			<div class='category-list'>
+				<span class='category label white-text'>alipay</span>
+			</div>
+	</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='41'>
+					<div class='test-heading'>
+						<span class='test-name'>DYNAMIC_ALPAY聚合码2.0-支付宝等待用户扫码</span>
+						<span class='test-time'>May 14, 2021 02:19:50 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:50 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:51 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+277ms</span>
+</div>
+	<div class='test-attributes'>
+			<div class='category-list'>
+				<span class='category label white-text'>alipay</span>
+			</div>
+	</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='42'>
+					<div class='test-heading'>
+						<span class='test-name'>DYNAMIC_WECHAT聚合码2.0-微信等待用户扫码</span>
+						<span class='test-time'>May 14, 2021 02:19:51 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:51 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:51 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+272ms</span>
+</div>
+	<div class='test-attributes'>
+			<div class='category-list'>
+				<span class='category label white-text'>alipay</span>
+			</div>
+	</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='43'>
+					<div class='test-heading'>
+						<span class='test-name'>DYNAMIC_UNION聚合码2.0-云闪付等待用户扫码</span>
+						<span class='test-time'>May 14, 2021 02:19:51 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:51 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:51 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+272ms</span>
+</div>
+	<div class='test-attributes'>
+			<div class='category-list'>
+				<span class='category label white-text'>alipay</span>
+			</div>
+	</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='44'>
+					<div class='test-heading'>
+						<span class='test-name'>聚合支付订单查询</span>
+						<span class='test-time'>May 14, 2021 02:19:51 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:51 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:51 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+227ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='45'>
+					<div class='test-heading'>
+						<span class='test-name'>门店个体工商户报备</span>
+						<span class='test-time'>May 14, 2021 02:19:52 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:52 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:52 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+458ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='46'>
+					<div class='test-heading'>
+						<span class='test-name'>代付-工商银行</span>
+						<span class='test-time'>May 14, 2021 02:19:52 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:52 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:53 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+251ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='47'>
+					<div class='test-heading'>
+						<span class='test-name'>代付查询</span>
+						<span class='test-time'>May 14, 2021 02:19:53 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:53 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:53 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+245ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='48'>
+					<div class='test-heading'>
+						<span class='test-name'>协议支付确认绑卡</span>
+						<span class='test-time'>May 14, 2021 02:19:53 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:53 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:54 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+852ms</span>
+</div>
+	<div class='test-attributes'>
+			<div class='category-list'>
+				<span class='category label white-text'>bind</span>
+			</div>
+	</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+				
+				
+				<li class='test displayed active  pass' status='pass' bdd='false' test-id='49'>
+					<div class='test-heading'>
+						<span class='test-name'>门店余额支付</span>
+						<span class='test-time'>May 14, 2021 02:19:54 PM</span>
+						<span class='test-status right pass'>pass</span>
+					</div>
+					<div class='test-content hide'>
+<div class='test-time-info'>
+	<span class='label start-time'>May 14, 2021 02:19:54 PM</span>
+	<span class='label end-time'>May 14, 2021 02:19:55 PM</span>
+	<span class='label time-taken grey lighten-1 white-text'>0h 0m 0s+824ms</span>
+</div>
+	<div class='test-steps'>
+		<table class='bordered table-results'>
+			<thead>
+				<tr>
+					<th>Status</th>
+					<th>Timestamp</th>
+					<th>Details</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='log' status='pass'>
+					<td class='status pass' title='pass' alt='pass'><i class='material-icons'>check_circle</i></td>
+					<td class='timestamp'>2:19:55 PM</td>
+					<td class='step-details'>Test passed</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+	</div>
+	<!-- subview left -->
+
+	<div class='subview-right left'>
+		<div class='view-summary'>
+			<h5 class='test-name'></h5>
+
+			<div id='step-filters' class="right">
+				<span class="blue-text" status="info" alt="info" title="info"><i class="material-icons">info_outline</i></span>
+				<span class="green-text" status="pass" alt="pass" title="pass"><i class="material-icons">check_circle</i></span>
+				<span class="red-text" status="fail" alt="fail" title="fail"><i class="material-icons">cancel</i></span>
+				<span class="red-text text-darken-4" status="fatal" alt="fatal" title="fatal"><i class="material-icons">cancel</i></span>
+				<span class="pink-text text-lighten-1" status="error" alt="error" title="error"><i class="material-icons">error</i></span>
+				<span class="orange-text" alt="warning" status="warning" title="warning"><i class="material-icons">warning</i></span>
+				<span class="teal-text" status="skip" alt="skip" title="skip"><i class="material-icons">redo</i></span>
+				<span status="clear" alt="Clear filters" title="Clear filters"><i class="material-icons">clear</i></span>
+			</div>
+		</div>
+	</div>
+	<!-- subview right -->
+
+</div>
+<!-- test view -->
+<div id='category-view' class='view hide'>
+
+	<section id='controls'>
+		<div class='controls grey lighten-4'>
+			<!-- search -->
+			<div class='chip transparent' alt='Search Tests' title='Search Tests'>
+				<a href="#" class='search-div'>
+					<i class='material-icons'>search</i> Search
+				</a>
+				
+				<div class='input-field left hide'>
+					<input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+				</div>
+				
+			</div>
+			<!-- search -->
+		</div>
+	</section>
+
+	<div class='subview-left left'>
+		
+		<div class='view-summary'>
+			<h5>Categories</h3>
+			<ul id='category-collection' class='category-collection'>
+				
+				<li class='category displayed active'>
+					<div class='category-heading'>
+						<span class='category-name'>bind</span>
+						<span class='category-status right'>
+							<span class='label pass'>2</span>
+						</span>
+					</div>
+					<div class='category-content hide'>
+						<div class='category-status-counts'>
+							<span class='label green accent-4 white-text'>Passed: 2</span>
+							
+							
+						</div>
+					
+						<div class='category-tests'>
+							<table class='bordered table-results'>
+								<thead>
+									<tr>
+										<th>Timestamp</th>
+										<th>TestName</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>May 14, 2021 02:19:38 PM</td>
+										<td class='linked' test-id='23'>协议支付预绑卡</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 14, 2021 02:19:53 PM</td>
+										<td class='linked' test-id='48'>协议支付确认绑卡</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</li>
+				<li class='category displayed active'>
+					<div class='category-heading'>
+						<span class='category-name'>alipay</span>
+						<span class='category-status right'>
+							<span class='label pass'>10</span>
+						</span>
+					</div>
+					<div class='category-content hide'>
+						<div class='category-status-counts'>
+							<span class='label green accent-4 white-text'>Passed: 10</span>
+							
+							
+						</div>
+					
+						<div class='category-tests'>
+							<table class='bordered table-results'>
+								<thead>
+									<tr>
+										<th>Timestamp</th>
+										<th>TestName</th>
+										<th>Status</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>May 14, 2021 02:19:47 PM</td>
+										<td class='linked' test-id='34'>ALI_NATIVE支付宝主扫交易处理中，请稍后查询</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 14, 2021 02:19:48 PM</td>
+										<td class='linked' test-id='35'>ALI_JSAPI支付宝-生活号交易失败</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 14, 2021 02:19:48 PM</td>
+										<td class='linked' test-id='36'>ALI_APPLET支付宝-小程序交易处理中，请稍后查询</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 14, 2021 02:19:49 PM</td>
+										<td class='linked' test-id='37'>WECHAT_JSAPI微信-公众号交易处理中，请稍后查询</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 14, 2021 02:19:49 PM</td>
+										<td class='linked' test-id='38'>WECHAT_APPLET微信-小程序交易处理中，请稍后查询</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 14, 2021 02:19:50 PM</td>
+										<td class='linked' test-id='39'>POLYMERIZE_CODE聚合码1.0等待用户扫码</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 14, 2021 02:19:50 PM</td>
+										<td class='linked' test-id='40'>DYNAMIC_ALL聚合码2.0-all等待用户扫码</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 14, 2021 02:19:50 PM</td>
+										<td class='linked' test-id='41'>DYNAMIC_ALPAY聚合码2.0-支付宝等待用户扫码</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 14, 2021 02:19:51 PM</td>
+										<td class='linked' test-id='42'>DYNAMIC_WECHAT聚合码2.0-微信等待用户扫码</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+									<tr>
+										<td>May 14, 2021 02:19:51 PM</td>
+										<td class='linked' test-id='43'>DYNAMIC_UNION聚合码2.0-云闪付等待用户扫码</td>
+										<td><span class='test-status pass'>pass</span></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</li>
+
+			</ul>
+		</div>
+	</div>
+
+	<div class='subview-right left'>
+		<div class='view-summary'>
+			<h5 class='category-name'></h5>
+		</div>
+	</div>
+</div>
+<!-- category view -->
+<div id='exception-view' class='view hide'>
+
+    <section id='controls'>
+        <div class='controls grey lighten-4'>
+            <!-- search -->
+            <div class='chip transparent' alt='Search Tests' title='Search Tests'>
+                <a href="#" class='search-div'>
+                    <i class='material-icons'>search</i> Search
+                </a>
+
+                <div class='input-field left hide'>
+                    <input id='search-tests' type='text' class='validate browser-default' placeholder='Search Tests...'>
+                </div>
+
+            </div>
+            <!-- search -->
+        </div>
+    </section>
+
+    <div class='subview-left left'>
+
+        <div class='view-summary'>
+            <h5>Exceptions</h3>
+                <ul id='exception-collection' class='exception-collection'>
+
+                        <li class='exception displayed active'>
+                            <div class='exception-heading'>
+                                <span class='exception-name'>java.lang.NullPointerException</span>
+                                <span class='exception-count right'><span class='label red lighten-1 white-text'>3</span></span>
+                            </div>
+                            <div class='exception-content hide'>
+                                <div class='exception-tests'>
+                                    <table class='bordered table-results'>
+                                        <thead>
+                                        <tr>
+                                            <th>Timestamp</th>
+                                            <th>TestName</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                                    <tr>
+                                                        <td>May 14, 2021 02:19:42 PM</td>
+                                                        <td class='linked' test-id='1'>商户进件-消费户个人</td>
+                                                        <td><pre><pre>java.lang.NullPointerException
+	at com.hsq.utils.RsaUtil.hex2Bytes(RsaUtil.java:314)
+	at com.hsq.utils.RsaUtil.decryptByPublicKey(RsaUtil.java:276)
+	at com.hsq.utils.RsaUtil.decryptByPubCerText(RsaUtil.java:117)
+	at com.hsq.utils.EncAndDnc.dencMessage(EncAndDnc.java:31)
+	at com.hsq.cases.MerchantRegister.merchantRegister(MerchantRegister.java:54)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 14, 2021 02:19:51 PM</td>
+                                                        <td class='linked' test-id='6'>门店企业报备</td>
+                                                        <td><pre><pre>java.lang.NullPointerException
+	at com.hsq.utils.RsaUtil.hex2Bytes(RsaUtil.java:314)
+	at com.hsq.utils.RsaUtil.decryptByPublicKey(RsaUtil.java:276)
+	at com.hsq.utils.RsaUtil.decryptByPubCerText(RsaUtil.java:117)
+	at com.hsq.utils.EncAndDnc.dencMessage(EncAndDnc.java:31)
+	at com.hsq.cases.StoreRegister.CompanyRegister(StoreRegister.java:91)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 14, 2021 02:19:52 PM</td>
+                                                        <td class='linked' test-id='7'>门店个人报备</td>
+                                                        <td><pre><pre>java.lang.NullPointerException
+	at com.hsq.utils.RsaUtil.hex2Bytes(RsaUtil.java:314)
+	at com.hsq.utils.RsaUtil.decryptByPublicKey(RsaUtil.java:276)
+	at com.hsq.utils.RsaUtil.decryptByPubCerText(RsaUtil.java:117)
+	at com.hsq.utils.EncAndDnc.dencMessage(EncAndDnc.java:31)
+	at com.hsq.cases.StoreRegister.personalRegister(StoreRegister.java:115)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></pre></td>
+                                                    </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </li>
+                        <li class='exception displayed active'>
+                            <div class='exception-heading'>
+                                <span class='exception-name'>com.alibaba.fastjson.JSONException</span>
+                                <span class='exception-count right'><span class='label red lighten-1 white-text'>5</span></span>
+                            </div>
+                            <div class='exception-content hide'>
+                                <div class='exception-tests'>
+                                    <table class='bordered table-results'>
+                                        <thead>
+                                        <tr>
+                                            <th>Timestamp</th>
+                                            <th>TestName</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                                    <tr>
+                                                        <td>May 14, 2021 02:19:42 PM</td>
+                                                        <td class='linked' test-id='2'>商户进件-非消费户个人</td>
+                                                        <td><pre><pre>com.alibaba.fastjson.JSONException: syntax error, pos 1, line 1, column 2c48b21f8d09420f9b45a495a78f745b306affbf8aacc3b80058a54ad0a3b367d374b0c20b5bdfffa43eaa629b4ee201b710767ada9034371aef45026440eca3335003aead54fb8764b64d65892cd5c4e299bc1e59b3581d9b4b361491e7931b84b42e282f21493119855b8a24a7f1a75648f5ee16237697b3fb83de6fdc37fac480137b2f5337d026eb3dd767c0e9ae6d6abe8786d22a2af0a93f75fe7c9fdcd62af7156081f911b0ab203c8055f91a8136495c85622d5a0bcd7a6b805e560d279c75ca0c8f4bd0e9972e07a102d115fb22564c5a194ede267c73ceff5572bbcbcb9181a887f907559c501fd1f1d367fd64b27c1c57118c4b332f9122b7bbac96efcde66dab25c3bd45a0d9863caffc5b4602d800c12cc9040df1529eb9be2bb214dbee1b93d1bc0c560367593bf7cb87c3774621550a2c9791783b35c2a024475cf1b66925df29745ea161410a22c7bbe5ae983705db3d7976d2d6f3fe119b04a06833bad3d432dc0463fda717cbfa5a3abcab16977b146a7c8f6d3714fcdbbd1cddee8bfbd809a0bef8e3be3dcb4d55256e24da12715e11b54d35449ae5c65e44e9098c489754e0466c33bd03ced6056786cb442e98fc48001701d1db24509400f449bdc9ed39f8433b625633fa670e63f9b92ae525a692e17d49a140cf7ec84b78e70bf2d459f6523464225126f6a93425c095b8e7dbb0b5a65a961d3a4b40eec5ab9007dc02773deba864c0ab0ddbd5b0e55ade4bec597a280b3b6af2d80fc3b6f48ddc44b4ce3e05d8940a216110ab00a9b370a3c29eb3a3d3557afa8e5bde9eb3b486bf57468d02bf202285d74b84d01496c0970876ba78c9e9f1986d3b6da946bd18b659a8a3d577a2328b881a2a2d2bb70df31a98d5185aa18c9879b0c501535803c8cc0a32c926683b49abf258c209ecaa7feec8fb8e68816fce58ac17203ef1d195f168c1505266e9000bca421e4f1960d6d60cd0e6c72fd0ec7d16baa37fedd36e9e3174ab5d9979a79479fccbd82005af94bda099d555f7c4ccbc1f281da84f6909c85e552264b519614bfc1e7abfaca4dd5961e8628bf09ed88b067d4a439b1d93ac1538732c8b380d67b3c0482e423f1227340f3a71acd02b213af9ec8cd3ce8ca4d197e985e843f9d6815ce12be2a88b9623ca03c65a33d06d709d85b5c3da9cdd884a7d8a911f89f5c2b1e6d6c95393a97b1ff738eb713fb50d8d0e8df4b1ee5e5f1903d93793eb232acfb95881ed5471ec09986a384b149e3c3d095a156102e8606038d88c46f4465d140b57bdd2811261c108df0000ae80251069034fb87e27fae5f59720dfe8df71ea785eb61442c1b638b6fe5efcae581f154cbb86d91457bad8f59f9b979ba5effb33cc5aaecb0b87df9df12ffe9943a727d77c277262ccf93904275d7091ab60f582676bff1aafa7122dc84f2e964cab1a2aff5959e902f50bc5dd181f6b39abf4066c14543f26257f0a190319f5e6ae9ea6993b2fc9a276715a108f196b495e8057ab15e42b5e01fd3a77a4cb7a45fa8538e7a1d36660f33f08858a1a0dd78eb37cdaef719f3ea3aa288ac05937c6a83443e113e5194c02fedf0484e0b571ca369a06b50872fc1d15f596886c53f5e9e7e8768dd42a6586124639c71e6cd4abae4f0c6b4d9327135fc78c2634847bbcbdec1e1be54f6e5711cae8dca411cf9049a97c93aa1498dae8c9f9b5120eba1074e94cdea5ed478128f62ec2b4e134b6b7eac6fa9c0b5666466dd6cbd139f986189144cf3272a24843e5d015946af99e981f6497ab96e955640bc210f8f931d3a90df3d76c1846588445e12d940fc111ff99ccd057b82cfadf72f58a27433a59eb7755690248f03855248eba48df0600ddb4ab5250510ee435e692f9137fff7990af1b77fa24ce55ae2b235babe390b136381d750357c3a4f3123b23e17f922d5f93e6117eb2a1aba117fca45f9e7d1af3a812d80e22834118f8adf12561183a06f385836d4abc70606d076fce569e19ff4e859070a4a2ec1f92328730b2d9afca6b1ecc6d8daaaa98ef6904423ece60825f36fccceb6b2b13a6a0b5ab2217baf77b210174b91bb7e2072656dd33fa9101116debf164e05e6e4253e851221835a02dc885154d72673fa14f7f9802659cf297846ad7a6e8598a9b143925a988026d795dcba3b7971b12e9ab7a041bedd098d9cf01cf6124bbf63c2278c89d8ff98af532bb117dddd6a1e9c304c7db17c3f2a3056aac76d31e8b75500cfe2ec31705552f619fa4e16706b9cbc26a303f28c1222fe268be82c8d8041a71c9eb701929eec94a458ded104f2ed2d89fffb5808004dc31af59f409bd2e383aee1cc259ecdfa4bdca671b16bd112792498cd097117ef44dcd73cf2845b85713f9aadcd95ff39250f7fa464fde6bd265df190454a15127e6143300a64f5c264446a7c619455cc811619d140b9c7188cb7643edc04eadf6729bbdd2b80ff88dfed07ef1b5d8bf5bc393a8d49bf4151de054948113de5166bb2a2adc9c35a98e29817a1c8f03dd088faaaf1bf9a376779bc6799de1d6629a3dd4c13461c702cca3251535cdbcf3497ea33fa9fb379f9e779be1e78f0a4d54702528ca3552a1bc9932b2bb057955f68feddc76ee6a56de9e3b04e8b46336071eae014999e051a64f7722fe2cc2a03da147848e99bf5229882f12544d84f2d8b938ba0a290646bb3351f687424fe4c810fb7253b19a93d930f7bc15809ac8d2d6522b89a9bf30d150060a451f5b0459a4b93e9924eb41291f41f4fae9fb31db8b131a0379ab0aaac34feaaf7ff62680389f96da0669d57dea89831d309d982fd747d5173f3a13ee34d685ad9fd9077ba9912a74828fbd4940e5f7d31b96293c3c50acaeb0e90170bd4031078a966b4dfea5c13edbe4da3d68d9f4095415e4e4753358938e16298910acb4fd7e2b07875a1e571b852d39ef38d969027f90ebb5cdf79429b223415d7d7da74c012345d976f6325a82777f44d9912fbbe4cf2d1c668fa63a96c028fcb2a03d1958267fcc3eee84355f6ad6c21f554460ea58d6fb78807e156bd9d9e0164517f8a7bdb817c2f7f3a7234110b80547ce47c28f1c9128126528fde36e434568b801bc9800d7813023b207773e00c6d1dffe16125aa372e5618edf562d3deff8297344c6b59432661965acf0b7440199bb81025e6c6f07f7c0f0ff20e2381c226cc1cc693cc5c02f411a36de6aedbb64786c2dbcb01b9380c85174ca475791faa03
+	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1481)
+	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1367)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:183)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:193)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
+	at com.alibaba.fastjson.JSON.parseObject(JSON.java:254)
+	at com.hsq.cases.MerchantRegister.merchantRegisterCommon(MerchantRegister.java:99)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 14, 2021 02:19:46 PM</td>
+                                                        <td class='linked' test-id='3'>商户进件-个体工商户</td>
+                                                        <td><pre><pre>com.alibaba.fastjson.JSONException: syntax error, pos 1, line 1, column 2ec00c1366b2bb18447e4fa1b798e8efcf521c4a11097966ba85a64ab245059bc3ad36cb55e6fa0f66c9409a14b1522d206367487bdb5403169bb7ebe170e4f809e82d8d8640de251eba306d81f4c5e7ad72fb95aea8e03c781a33be711e027591cc79741842b45c86225252b5392773117d54b88fd235ba6fa7396541653acbcce64d94533436b95fa5e1ac7f3a70c5d9f3d9976ba41174da1fcd86dfcadd34f3e3457da8d46a534c53847cc4abe21116dab2f8254a1de804334b42a41c02bcdc86b40bf0e1c255e255a8c8028ca2bfea0280f8211edfc101ca1fc06ab13c44df35a116b0e7bcd3e2fa061b5e9af28ce6e4c98a36a1590c588859a784c446cca02598778cac7b1d46f3e9a9827ac281f2eae7875c2cb896bde0cde538911990743b0c909b73487bf027ad8a68277118a86a50c9899781ea968978c5e01770d6a2a6028df1b053e2e8a677441f47e47ab267612866d732a0f0b64b0003f7be48015191a964346760bcb765eaf363e9e386eeacb9e283eab0fcf8f6e0040b3f9ae2ace7332e2569137bc2f45a1512a6f3eb4c5e5e86a7f37444f15c09cacd1003aa7e589e135ed22b8b9a6deff6cfd7bc367798dc78f9b09e46021bebe4115096aace41d9581aed9b79a75c68a62d406e95ee9675383af59ac0ef99d820dccd1ca583788ad897c238f4763b39533ab05f330326dd902957a4fc18ee3551171c7a3b00ce784a8f7652b2eac386ee32f79f4aeef8131657fd4c7b47bf40fbac359a0f97cb89f2487d191258947c7ffd6d1203f7f116e6628847ba57deb0e92a89b17bd9608af1c0dd4bbfac50d677dc8eb22d39e6bdcfcdfbf5ea3f4f2113b5e535437532c0f6b58de001ce8511b759344bc683f78797b9a073e761c9720a0fc487709e1cb8084038dcbcd4f103c359b06c2aa0a9dd63dedb3c09ed42b5a899fa673a220de465c2f49068940e1903a329e041e8fb2ece40586d0e1945d93224a88576411c53ad4901d504869545b2cbf80519df01a7d54eabd903e8c0d34d74c8af2bfe21d6345bfdd3c995471daf6d0ba5b5f4e89c3d451508a9810b08236619954d8fe0c7caafa145046ab5a353f6802c16fbe638e902cad168ee87cfede5372ac37cc72f7cb056ffbead6c226a151e3bf7d485212eff66e2eabae1d6bb2cfc12f0792285e5fc7696dd0f1764d968751357d94e29628ae39c9623f911f7441814e44eb21fe569a731a1fff5ed275017dca10a4ae6a1902ab047e447fd8b2194c17dfea22d74f2a24b9862b560997405d278a64a238c8a8500c053f4b8c75bf67720407ae56a6aee5dd1d2d998cdc4011f5845da6fab08074cedd180b6d47960004adcc69559ae2b145ad5171431b8c346248409d4759e460c442557db1648aafe14ef1ba8d1c44cda36e8289a76ebd2846ca356835bda146a21174aec3b60ff2e06cf000f235fac8dce9e45f514359c8927c1d79d51b1b6ce7e048ae75cd1ce0e907342a7bdca624129c4e0b5855f374db0b0ede7c1d535070bd6142b2518e4a3d27874d232abd5e4b189a1cc08871b7897b428c48969cefb8702e2b12c98f5122ba352b5d10f8026b1490c241cfff0773512261b5c8f9108d7b8bc8068c23a84a26fdb7c9ae555e0e81cfa3c96a23298eb4e21ac63aa958ab66a6a04447dcebc77a45bdc2b2231367a95c9a1aed87a7880221ba4d48791bf7516cfb5027b6f491ddb5bc300b0bae2d333f64b3093a65b2f9ab70e06b71fd24b6400ad7e8f7f41fd86a482495b8f677958288c69db8cfe1bccb3ad49acc8ffe729c5aa100e5e164822b99330f2630fcaf87abc6cd6a3d2655c43dd964567f9af9d5be65fdad659e1c231fbb812cb55cd1baef727f4821ea0c4b82441eb220d66f9fa5dd18911ab77bdd2f8a2d55c05b45630a4ae587ea48551d3ac76e774764c002c22dc44a6d9a2e9f1ee39c7fe01a4d43434fe8a4a37592f1e10861afd156c16a1706651a8f4f924a84ef033446df7c1ad3ce62882779953fb3b5280cdbc3c0fcf51efa4ca5433acd522cf7d0b1a23bec042ed1ee0bc44630a080b6b686403b11a4e7bcf96b5c47cd1387d36be54a67944d7d2741f090370a10d37a06383283c655d121a8333366517104ff033b0305d57ab3b17db479828f35bac23f108611a611a516868e885322c3a28191c501d7bc34f2b56a48addacba682fbcdf75449357f5a7df1da0a0fdbd3ebe2afb2b1d37a628444360dfc9a4009ae8f76a8019c8edd64fa1e7317d61c6bc13a935bf49dbdb57cd48f9f5631ed330ab14e2abf1f9f1ce111a988cc6e15cbaa30b121bb26f309ec98adc03983e9ece7372db2ddbbe25ed7cca730b325ad6e7bfdf6f5d2993d07cceefcd6fd998bccd5d4a862a77559794578e4d58f040b17efd00b190985d8dafb7f8a726044d364b9d22b96a1de292b8d28d899b429f8cfc596348cc9ee537ea97fffa1a9264c2345ca23c233ea8ab3094c69492670958469ea4b86abec34b78806fdc4cb7d22e86778e5a2261b3af28e570aa5300679606c6b563b66a375a8d93a614565aa5c241b085e7e75cde38a7a1267cc6c45fcfd943892dd59952b52e439e763defe8eaa4a9fe548b39a4104673ab598f8a36373d4c30a91af3ff6ec6d3f4aa5678c0968e4e6e6740b00f98f2455fc0e190fc411d7a1c7a1a1a9de14458120f1e6421fc1ea536241f853d2f1a17002a05c1320c6808caa3e28aac143df1629d59d2a45eafe948107cf4daad5879f72617ef19bbc72ed2c8e4067c651b8e72fe8a6d3c951215adad687a02d2f94ab6a3eeb87c83819cb70ba0090912db5dbe47c4c299c2fec6aca4c75925ae78a32583361445c01d81c5363476fe35544c31eae64961a58e08eeaae28c9761e82ca22e514c47ef58425d2f4c4ba521d46b8096e80f36edeb51fdc709c70da9e51674ce8dfc27415f3ae892e1f9e2da9386b5c868046907db80035df632fd7d162e94f872366202946050c80e21d420f8e9b7df13fa6b57111fe0ee5c5421ee6b1ba01b8a5d72f7c1cdf3bd12ae63015ed9c58cf2f839205904b08e20f083228afe12258c303051307e69fcc56ca43e82f4585a127d1ccc23f8e2ab8cda5851c630eca4dbeefaaf77ee046bc841692155e171bb2b6cd6a3e6ede6174c7e6ce724ab70c3d1b134913d844c89ab1b7b024e7b07043d39cd0b82b7a24a9b07e6c150cda90ad3e0f0d75a47fa9352d54aa7b1d88069ebe3b9049821c254c638344797aae34eb7e9b6adca886c3fad61bf3e6a0fa1298baae8e8719dd20146079a1c2629a3849851260acb6646ccc3e50e31c9373ae451857e4d7d24a3592a33c215dd1ba2cd0c4b5ffbfb8cd638efd287c5bc81a31a6e250b0540eed3b884ca10141cd865ea31b9554e2d0d3c4db21b66a2693c285694d3488d427c86091dc417bed9b46ac3bba72c6be32818d4e5c2b27e8f9fd541438e5caa8c747558523b107f4663bbb65c3a1715b9bad03a2c1706fef464c5006f8c362f3e6079128e830b0ff7532c354cdc847975a546db7b200b46e529e5ac28bb273c9f969b58c9dae9489bd352e0cafa14aedd2bf0491ae89dcdaddd90924da2a726e20eaa33133d1909dc586b5c5413d451b7da62d044d0f57d042046482826c6001acaa12fb4bb48d97ae47f06f042e23a5063890e833ebf5d4c261c58d6f47a681d5811c74f06357984236b520887e8e388494d8a90d1c1824b5567839f55ab12127d10fecba1c33e95334a53a2bb5459bd4d9ba2ba8c9e561df9cd6786c53694ed6920b23c20f5987222ffba868e0471f8c6334f9260c0c4fd4e15907a2aac10d3bdf9d04ecd9836cbee89fe3f441c3f0b1aa2e1b658f52d49d235ae9e918eb86ceb8d383daab02b188d31d2932c8f568844db2bfd9778394d537f9c24aa865ea3c89da7cf55239dcec106122613c553f72a1d2917137ae996fc4a6c8bd742887a3cddc893f941967a84c096a4813b227832fdebfa8179efc599dbd3bcd0e3296ec8810a7b00b5c0cfc667b63e18d9f65565d7360e3546b04ec733687fbcd08e8a088a981ecd18efcef5e2dc2cdfeedd74ca14ac93966051588c1f0de6b15d818a785dedc581565751980309f111f58379930e6ca157a0660ada1b3db399e6cc78fd01fc2323445809a32e8cb0b11ae9fb7123a54ede0668b43f4cf983b438bc29817b3a676dfed1a60bb45475b3430b7d31b0a756c32e5fc4a4eb96b73eb7048600538a806d2f16fb0d886f30e654e4ec03a7f95f607818652463a85bb1567f8ad47037f720b424450123ae4d3e38c0b1d7eba96feaf8ca49e9b0e2e348524e7b4a3159d0e51553608a6c59ccc
+	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1481)
+	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1367)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:183)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:193)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
+	at com.alibaba.fastjson.JSON.parseObject(JSON.java:254)
+	at com.hsq.cases.MerchantRegister.merchantRegisterPersonCompany(MerchantRegister.java:204)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 14, 2021 02:19:47 PM</td>
+                                                        <td class='linked' test-id='4'>微信公众号下单</td>
+                                                        <td><pre><pre>com.alibaba.fastjson.JSONException: syntax error, pos 1, line 1, column 2e83f11eb680a9d8bdeab21dab63c3d4e6a85d5988d722686326a03c09c7496d2c51f495ba3a8af8b73616e255d05bda6813ff39755eec865dc91ebf7912c993cec3911ebf0ca458118054ef8aa846dbbba79596ef5c35cd7bb06ab2a88ed80d590afa0faf4d7c2d0aa858222b55f49cde39074dc1b1d788afb65c275ec9b42198b972122dbaf114b5fff23edbec2ed9409b39a59b8c5180b554cedb4eed59150e67ddc3b23e2a5a84d969b88e202aa0021919649dbe554c77b54d7e0602bfabc89a12af3290599f05d30d10b8374c7d4c414cc18cab666b6618c73f3b5760c3c7318c03f9d3fd86e36e10d4d4bff07d8f4b06cabcac1ebaa41d5005a403fff071b1c90e8fb4d3f409eceb6b8c98fab1d02cfe56d26385da37bc3522d9f4b511522cd0dc78934bcbcb6b0e1969c59a9ae519e9084745b566370fc0f4fdf5907b89f6f8aec5d99939cf5d75833e0fcf01f6e36f4a522348078bd1af75f65379d1c67155138e1071a3480178c5fc2dcc3af9d73187cd88bd1bb8a3d4f9ec0afad44818af8fad61f663caf3980a5f2b2781b87c6e24890000b9d7f6ea169df3fa76efdee6f618dfdda769c733a473c22abe673c0fe6b3e9edebc3c5e9bb47c4f3d6952c0de978e78143a4b730dff4312c9fb890a58145b15e941684ef6b5334f2fb21fa08c8b59f7b9138b350aba692b26f3b47c4260ac9b07b865ecd94dfa010062b4699368156777fbb5ea19c423f0f5d6e374136ff5e95777f5056671fc618a45efe389f8f4cdc22f2206c46abc2b9a078dc9f4710ecc5af27a7311b28fa15a61a3a863ca5820215322742bbdd6e75e59d0fee5b0e983356274fe94935db6f8271bddf8823cb2085c40d6693192c7434e430f9954e91770a06c32daf035c1abbe7850aaa58331409838ae80ee945ef6dacad021688465ae2d546d9a15b9fc2ddab81ca9125edf37210b8a3e1cf5f490caea0c7f53409a0887d95231e15fa8cc624925e0f6f72a9e8235769f41d5218e91aced1764a5b488c93f8bcfcc720d00e099bc748ffb002285cbc99ac059fc519ad1d529abc30262f6ce9cb86ed2382d44
+	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1481)
+	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1367)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:183)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:193)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
+	at com.alibaba.fastjson.JSON.parseObject(JSON.java:254)
+	at com.hsq.cases.PolymerizePay.WeChatJS(PolymerizePay.java:198)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 14, 2021 02:19:51 PM</td>
+                                                        <td class='linked' test-id='5'>聚合支付支付宝主扫含营销户</td>
+                                                        <td><pre><pre>com.alibaba.fastjson.JSONException: not close json text, token : error
+	at com.alibaba.fastjson.parser.DefaultJSONParser.close(DefaultJSONParser.java:1527)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:187)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:193)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
+	at com.alibaba.fastjson.JSON.parseObject(JSON.java:254)
+	at com.hsq.cases.PolymerizePay.aliPayMarket(PolymerizePay.java:158)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 14, 2021 02:19:53 PM</td>
+                                                        <td class='linked' test-id='8'>代理商报备结果查询</td>
+                                                        <td><pre><pre>com.alibaba.fastjson.JSONException: syntax error, pos 1, line 1, column 2c8ea1168f7282051f12983834ed3f6973b244fc730a3a493e689ae3ab94c55e8bf7c45e70376fcf7bed589025f43d7136dd1ceb43dd16b0d41cbe050d6ed5c7c0419f1e9f732aab6922656ff6caea7ba9e4462ed9cb62e8efb80572b8ed594bd66a5e6f9ad03d02edd1f8cb2b9a62ac3fabf90cd2a2f486d231186d0175e3e30
+	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1481)
+	at com.alibaba.fastjson.parser.DefaultJSONParser.parse(DefaultJSONParser.java:1367)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:183)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:193)
+	at com.alibaba.fastjson.JSON.parse(JSON.java:149)
+	at com.alibaba.fastjson.JSON.parseObject(JSON.java:254)
+	at com.hsq.cases.AgentRegister.AgentRegisterResult(AgentRegister.java:123)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></pre></td>
+                                                    </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </li>
+                        <li class='exception displayed active'>
+                            <div class='exception-heading'>
+                                <span class='exception-name'>org.apache.ibatis.exceptions.PersistenceException</span>
+                                <span class='exception-count right'><span class='label red lighten-1 white-text'>4</span></span>
+                            </div>
+                            <div class='exception-content hide'>
+                                <div class='exception-tests'>
+                                    <table class='bordered table-results'>
+                                        <thead>
+                                        <tr>
+                                            <th>Timestamp</th>
+                                            <th>TestName</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                                    <tr>
+                                                        <td>May 14, 2021 02:19:55 PM</td>
+                                                        <td class='linked' test-id='9'>网银订单查询</td>
+                                                        <td><pre><pre>org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+### Cause: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:150)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:77)
+	at com.hsq.cases.Ebank.eBankQuery(Ebank.java:57)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+Caused by: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+	at org.apache.ibatis.executor.BaseExecutor.createCacheKey(BaseExecutor.java:197)
+	at org.apache.ibatis.executor.CachingExecutor.createCacheKey(CachingExecutor.java:146)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:82)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148)
+	... 27 more
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 14, 2021 02:19:55 PM</td>
+                                                        <td class='linked' test-id='10'>网银分账</td>
+                                                        <td><pre><pre>org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+### Cause: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:150)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:77)
+	at com.hsq.cases.Ebank.eBankShare(Ebank.java:82)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+Caused by: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+	at org.apache.ibatis.executor.BaseExecutor.createCacheKey(BaseExecutor.java:197)
+	at org.apache.ibatis.executor.CachingExecutor.createCacheKey(CachingExecutor.java:146)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:82)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148)
+	... 27 more
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 14, 2021 02:19:55 PM</td>
+                                                        <td class='linked' test-id='11'>协议支付直接支付</td>
+                                                        <td><pre><pre>org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+### Cause: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:150)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:77)
+	at com.hsq.cases.AgreePay.AgreeDirectPay(AgreePay.java:96)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+Caused by: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+	at org.apache.ibatis.executor.BaseExecutor.createCacheKey(BaseExecutor.java:197)
+	at org.apache.ibatis.executor.CachingExecutor.createCacheKey(CachingExecutor.java:146)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:82)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148)
+	... 27 more
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 14, 2021 02:19:55 PM</td>
+                                                        <td class='linked' test-id='12'>协议支付含营销户</td>
+                                                        <td><pre><pre>org.apache.ibatis.exceptions.PersistenceException: 
+### Error querying database.  Cause: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+### Cause: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+	at org.apache.ibatis.exceptions.ExceptionFactory.wrapException(ExceptionFactory.java:30)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:150)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:141)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectOne(DefaultSqlSession.java:77)
+	at com.hsq.cases.AgreePay.AgreeDirectPayIncludeMarketing(AgreePay.java:186)
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
+	at java.lang.reflect.Method.invoke(Method.java:498)
+	at org.testng.internal.MethodInvocationHelper.invokeMethod(MethodInvocationHelper.java:104)
+	at org.testng.internal.Invoker.invokeMethod(Invoker.java:645)
+	at org.testng.internal.Invoker.invokeTestMethod(Invoker.java:851)
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1177)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+Caused by: org.apache.ibatis.executor.ExecutorException: Executor was closed.
+	at org.apache.ibatis.executor.BaseExecutor.createCacheKey(BaseExecutor.java:197)
+	at org.apache.ibatis.executor.CachingExecutor.createCacheKey(CachingExecutor.java:146)
+	at org.apache.ibatis.executor.CachingExecutor.query(CachingExecutor.java:82)
+	at org.apache.ibatis.session.defaults.DefaultSqlSession.selectList(DefaultSqlSession.java:148)
+	... 27 more
+</pre></pre></td>
+                                                    </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </li>
+                        <li class='exception displayed active'>
+                            <div class='exception-heading'>
+                                <span class='exception-name'>java.lang.Throwable</span>
+                                <span class='exception-count right'><span class='label red lighten-1 white-text'>6</span></span>
+                            </div>
+                            <div class='exception-content hide'>
+                                <div class='exception-tests'>
+                                    <table class='bordered table-results'>
+                                        <thead>
+                                        <tr>
+                                            <th>Timestamp</th>
+                                            <th>TestName</th>
+                                            <th>Status</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                                    <tr>
+                                                        <td>May 14, 2021 02:19:55 PM</td>
+                                                        <td class='linked' test-id='13'>消费户进件结果查询</td>
+                                                        <td><pre><pre>java.lang.Throwable: Method MerchantRegister.merchantRegisterQuery()[pri:0, instance:com.hsq.cases.MerchantRegister@27f981c6] depends on not successfully finished methods
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1068)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 14, 2021 02:19:55 PM</td>
+                                                        <td class='linked' test-id='14'>开户确认</td>
+                                                        <td><pre><pre>java.lang.Throwable: Method MerchantRegister.merchantRegisterConfirm()[pri:0, instance:com.hsq.cases.MerchantRegister@27f981c6] depends on not successfully finished methods
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1068)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 14, 2021 02:19:55 PM</td>
+                                                        <td class='linked' test-id='15'>门店报备结果查询</td>
+                                                        <td><pre><pre>java.lang.Throwable: Method StoreRegister.RegisterResult()[pri:0, instance:com.hsq.cases.StoreRegister@1151e434] depends on not successfully finished methods
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1068)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 14, 2021 02:19:55 PM</td>
+                                                        <td class='linked' test-id='16'>协议支付退款</td>
+                                                        <td><pre><pre>java.lang.Throwable: Method AgreePay.AgreePayRefund()[pri:0, instance:com.hsq.cases.AgreePay@201a4587] depends on not successfully finished methods
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1068)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 14, 2021 02:19:55 PM</td>
+                                                        <td class='linked' test-id='17'>协议支付分账</td>
+                                                        <td><pre><pre>java.lang.Throwable: Method AgreePay.AgreeShare()[pri:0, instance:com.hsq.cases.AgreePay@201a4587] depends on not successfully finished methods
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1068)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></pre></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>May 14, 2021 02:19:55 PM</td>
+                                                        <td class='linked' test-id='18'>协议支付含营销户退款</td>
+                                                        <td><pre><pre>java.lang.Throwable: Method AgreePay.AgreePayRefundMarketing()[pri:0, instance:com.hsq.cases.AgreePay@201a4587] depends on not successfully finished methods
+	at org.testng.internal.Invoker.invokeTestMethods(Invoker.java:1068)
+	at org.testng.internal.TestMethodWorker.invokeTestMethods(TestMethodWorker.java:129)
+	at org.testng.internal.TestMethodWorker.run(TestMethodWorker.java:112)
+	at org.testng.TestRunner.privateRun(TestRunner.java:756)
+	at org.testng.TestRunner.run(TestRunner.java:610)
+	at org.testng.SuiteRunner.runTest(SuiteRunner.java:387)
+	at org.testng.SuiteRunner.runSequentially(SuiteRunner.java:382)
+	at org.testng.SuiteRunner.privateRun(SuiteRunner.java:340)
+	at org.testng.SuiteRunner.run(SuiteRunner.java:289)
+	at org.testng.SuiteRunnerWorker.runSuite(SuiteRunnerWorker.java:52)
+	at org.testng.SuiteRunnerWorker.run(SuiteRunnerWorker.java:86)
+	at org.testng.TestNG.runSuitesSequentially(TestNG.java:1293)
+	at org.testng.TestNG.runSuitesLocally(TestNG.java:1218)
+	at org.testng.TestNG.runSuites(TestNG.java:1133)
+	at org.testng.TestNG.run(TestNG.java:1104)
+	at org.testng.IDEARemoteTestNG.run(IDEARemoteTestNG.java:72)
+	at org.testng.RemoteTestNGStarter.main(RemoteTestNGStarter.java:123)
+</pre></pre></td>
+                                                    </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </li>
+                </ul>
+        </div>
+    </div>
+
+    <div class='subview-right left'>
+        <div class='view-summary'>
+            <h5 class='exception-name'></h5>
+        </div>
+    </div>
+</div>
+<!-- exception view -->
+<div id='dashboard-view' class='view hide'>
+	<div class='card-panel transparent np-v'>
+		<h5>Dashboard</h5>
+
+		<div class='row'>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Tests
+					<div class='panel-lead'>49</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Steps
+					<div class='panel-lead'>49</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Start
+					<div class='panel-lead'>May 14, 2021 02:19:32 PM</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+			 		End
+			 		<div class='panel-lead'>May 14, 2021 02:19:36 PM</div>
+				</div>
+			</div>
+			<div class='col s2'>
+				<div class='card-panel r'>
+					Time Taken
+					<div class='panel-lead'>4,619ms</div>
+				</div>
+			</div>
+			<div class='col s4'>
+				<div class='card-panel'>
+					<span class='right label cyan white-text'>Categories</span><p>&nbsp;</p>
+					
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Passed</th>
+							<th>Failed</th>
+							<th>Others</th>
+						</tr>
+						<tr>
+							<td>bind</td>
+							<td>2</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+						<tr>
+							<td>alipay</td>
+							<td>10</td>
+							<td>0</td>
+							<td>0</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- dashboard view -->
+<!-- testrunner-logs view -->
+		</div>
+		<!-- container -->
+
+		<script>
+			var statusGroup = {
+				passParent: 31,
+				failParent: 12,
+				fatalParent: 0,
+				errorParent: 0,
+				warningParent: 0,
+				skipParent: 6,
+				exceptionsParent: 18,
+				
+				passChild: 31,
+				failChild: 12,
+				fatalChild: 0,
+				errorChild: 0,
+				warningChild: 0,
+				skipChild: 6,
+				infoChild: 0,
+				exceptionsChild: 18,
+				
+				passGrandChild: 0,
+				failGrandChild: 0,
+				fatalGrandChild: 0,
+				errorGrandChild: 0,
+				warningGrandChild: 0,
+				skipGrandChild: 0,
+				infoGrandChild: 0,
+				exceptionsGrandChild: 0,
+			};
+		</script>
+		
+			<script src='http://extentreports.com/resx/dist/js/extent.js' type='text/javascript'></script>
+		
+		
+	</body>
+	
+</html>
