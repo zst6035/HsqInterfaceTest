@@ -19,12 +19,18 @@ public class MerchantRegister {
     String name=TestConfig.getChineseName(1);
     Map map=TestConfig.getMap();
     String uniqueCode=null;
-    String outMerchantNo= TestConfig.dateString();
+    String outMerchantNo= TestConfig.transNo();
 
 
     @BeforeClass
     public void BeforePay(){
+
         log.info("before 测试");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -41,6 +47,11 @@ public class MerchantRegister {
         jsonObject.put("servicePhone","131"+TestConfig.getRandom4(8));
         log.info("请求体"+jsonObject.toString());
         //加密后的字符串
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         EncAndDnc e1=new EncAndDnc();
         String signContent= e1.encMessage(jsonObject.toString());
         reqInfo.setSignContent(signContent);
@@ -50,10 +61,15 @@ public class MerchantRegister {
         map.put("signContent",signContent);
         log.info("完整请求体"+map.toString());
         String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
+        log.info("宝财通-消费户个人==============={}",result);
         //返回数据转换为json
         // JSONObject jsonObject1=JSONObject.parseObject(result);
         //请求结果进行解密
-
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         String res=e1.dencMessage(result);
         //再将请求结果转换为json格式
         JSONObject jsonObject2= JSONObject.parseObject(res);
@@ -100,7 +116,7 @@ public class MerchantRegister {
         ReqInfo reqInfo= DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","商户进件-个人");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","621082"+TestConfig.getRandom4(9)+"7");
-        jsonObject.put("outMerchantNo", TestConfig.dateString());
+        jsonObject.put("outMerchantNo", TestConfig.transNo());
         jsonObject.put("name",name);
         jsonObject.put("merchantName","个人普通户"+name);
         jsonObject.put("merchantShortName","个人普通户"+name);
@@ -171,7 +187,7 @@ public class MerchantRegister {
         ReqInfo reqInfo= DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","宝财通企业商户进件");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","621082"+TestConfig.getRandom4(10));
-        jsonObject.put("outMerchantNo", TestConfig.dateString());
+        jsonObject.put("outMerchantNo", TestConfig.transNo());
         jsonObject.put("contactName",name);
         jsonObject.put("contactPhone","131"+TestConfig.getRandom4(8));
         jsonObject.put("legalPhone","131"+TestConfig.getRandom4(8));
@@ -208,7 +224,7 @@ public class MerchantRegister {
         ReqInfo reqInfo=  DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","宝财通企业商户进件");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","621082"+TestConfig.getRandom4(10));
-        jsonObject.put("outMerchantNo", TestConfig.dateString());
+        jsonObject.put("outMerchantNo", TestConfig.transNo());
         jsonObject.put("contactName",name);
         jsonObject.put("contactPhone","131"+TestConfig.getRandom4(8));
         jsonObject.put("legalPhone","131"+TestConfig.getRandom4(8));

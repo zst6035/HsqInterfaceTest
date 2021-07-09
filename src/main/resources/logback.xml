@@ -19,9 +19,11 @@
 
     <!--将日志输出到控制台  -->
     <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <!--<param name="Encoding" value="UTF-8" />-->
         <!-- encoder 默认配置为PatternLayoutEncoder -->
         <encoder>
             <pattern>${commonPattern}</pattern>
+            <charset class="java.nio.charset.Charset">UTF-8</charset>
         </encoder>
     </appender>
 
@@ -31,6 +33,7 @@
     -->
     <appender name="log_file"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--<param name="Encoding" value="UTF-8" />-->
         <file>${path}${logFileName}.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${path}${logFileName}.%d{yyyy-MM-dd}.%i.log.zip
@@ -51,12 +54,14 @@
 
         <encoder>
             <pattern>${commonPattern}</pattern>
+            <charset class="java.nio.charset.Charset">UTF-8</charset>
         </encoder>
     </appender>
 
 
     <appender name="sql_log_file"
               class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--<param name="Encoding" value="UTF-8" />-->
         <file>${path}${logFileName}.sql.log</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>${path}${logFileName}.sql.%d{yyyy-MM-dd}.%i.log.zip
@@ -72,6 +77,7 @@
 
         <encoder>
             <pattern>${commonPattern}</pattern>
+            <charset class="java.nio.charset.Charset">UTF-8</charset>
         </encoder>
     </appender>
 

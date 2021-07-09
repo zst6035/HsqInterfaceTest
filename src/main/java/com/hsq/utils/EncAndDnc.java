@@ -7,6 +7,8 @@ import org.apache.commons.codec.binary.Base64;
 import java.io.InputStream;
 
 public class EncAndDnc {
+   private RsaUtil rsaUtil=new RsaUtil();
+
     //加密
     public   String  encMessage(String message){
         String signContent;
@@ -15,7 +17,7 @@ public class EncAndDnc {
         //读取私钥证书
         byte[] pfx = PfxRead.readStream(in);
         //加密主题报文，加密还需要私钥密码
-        signContent = RsaUtil.encryptByPriPfxStream(Base64.encodeBase64String(message.getBytes()), pfx, TestConfig.merchant.getPrivateKeyPwd());
+        signContent = rsaUtil.encryptByPriPfxStream(Base64.encodeBase64String(message.getBytes()), pfx, TestConfig.merchant.getPrivateKeyPwd());
        // System.out.println("密文："+signContent);
         return signContent;
     }
@@ -28,7 +30,7 @@ public class EncAndDnc {
      //   System.out.println("密文结果"+jsonObject.toString());
      String result2=  new String(Base64.decodeBase64(
                     //解密响应报文，解密需要平台公钥,解密响应报文(平台分配)
-                    RsaUtil.decryptByPubCerText((String) jsonObject.get("result"), TestConfig.merchant.getRsaKey())));
+             rsaUtil.decryptByPubCerText((String) jsonObject.get("result"), TestConfig.merchant.getRsaKey())));
        return result2;
     }
 }

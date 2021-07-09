@@ -26,7 +26,7 @@ public class AgentRegister {
 
     String name=TestConfig.getChineseName(1);
     Map map;
-   String transNo=TestConfig.dateString();
+   String transNo=TestConfig.transNo();
 
     @BeforeClass
     public void BeforePay(){
@@ -40,13 +40,16 @@ public class AgentRegister {
     }
 
 
-    @Test(description = "代理商报备企业平台商")
+   @Test(description = "代理商报备企业平台商" )
+   // @Test(description = "代理商报备企业平台商" ,enabled = false)
     public void  AgentCompanyRegister()throws Exception{
        ReqInfo reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","代理商报备企业商户");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","622848"+TestConfig.getRandom4(13));
         jsonObject.put("transNo",transNo);
         jsonObject.put("contactName",name);
+        /*法人证件类型：1大陆身份证 2护照 3 港澳台 4台湾居民 5其他*/
+        jsonObject.put("legalIdcardType","3");
         jsonObject.put("contactPhone","131"+TestConfig.getRandom4(8));
         jsonObject.put("servicePhone","131"+TestConfig.getRandom4(8));
         log.info("请求明文："+jsonObject.toString());
@@ -70,8 +73,8 @@ public class AgentRegister {
     public void  AgentLegalRegister()throws Exception{
        ReqInfo reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","代理商报备个体工商户");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
-        jsonObject.put("bankCardNo","622848"+TestConfig.getRandom4(13));
-        jsonObject.put("transNo",TestConfig.dateString());
+        //jsonObject.put("bankCardNo","622848"+TestConfig.getRandom4(13));
+        jsonObject.put("transNo",TestConfig.transNo());
         jsonObject.put("contactName",name);
         jsonObject.put("contactPhone","131"+TestConfig.getRandom4(8));
         jsonObject.put("servicePhone","131"+TestConfig.getRandom4(8));
@@ -98,10 +101,11 @@ public class AgentRegister {
     public void AgentPersonalRegister()throws Exception{
       ReqInfo  reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","代理商报备自然人商户");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
-        //修改一些常用变量
-        jsonObject.put("bankCardNo","622848"+TestConfig.getRandom4(13));
-        jsonObject.put("transNo",TestConfig.dateString());
-        jsonObject.put("name",name);
+        //修改一些常用变量,银行卡号需要是真实的
+        jsonObject.put("bankCardNo","6214850210371263");
+        jsonObject.put("transNo",TestConfig.transNo());
+        jsonObject.put("name","张守婷");
+        jsonObject.put("merchantName","张守婷");
         jsonObject.put("bankPhone","131"+TestConfig.getRandom4(8));
         jsonObject.put("phone","131"+TestConfig.getRandom4(8));
         log.info("请求明文："+jsonObject.toString());

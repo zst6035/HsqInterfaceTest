@@ -254,6 +254,7 @@ public static void sendMail(String[] tos,File file) throws Exception {
         Date now=new Date();
        String dateString= dateFormat.format(now);
        // System.out.println(dateString);
+
         return dateString;
 
     }

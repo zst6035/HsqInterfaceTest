@@ -122,7 +122,7 @@ public void aliPayMarket()throws Exception{
     ReqInfo reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","聚合支付支付宝主扫");
     JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
     jsonObject.put("requestDate", TestConfig.dateString());
-    jsonObject.put("transNo",TestConfig.dateString());
+    jsonObject.put("transNo",TestConfig.transNo());
     //总收单金额：2000
     jsonObject.put("orderAmt","1000");
     jsonObject.put("totalOrderAmt","2000");
@@ -157,7 +157,7 @@ public void aliPayMarket()throws Exception{
         ReqInfo reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","聚合支付跳转收银台");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("requestDate", TestConfig.dateString());
-        jsonObject.put("transNo",TestConfig.dateString());
+        jsonObject.put("transNo",TestConfig.transNo());
 
         encAndDnc=new EncAndDnc();
         //加密后的字符串
@@ -174,9 +174,55 @@ public void aliPayMarket()throws Exception{
         JSONObject jsonObject3=JSONObject.parseObject(resultData);
         Assert.assertEquals(jsonObject3.get("respMsg"),"等待用户扫码");
 
+    }
 
 
+    //一码多付下单
+    @Test(description = "一码多付下单")
+    public void OnePay()throws Exception{
+        ReqInfo reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","一码多付下单");
+        JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
+        jsonObject.put("requestDate", TestConfig.dateString());
+        jsonObject.put("transNo",TestConfig.transNo());
+
+        encAndDnc=new EncAndDnc();
+        //加密后的字符串
+        String signContent= encAndDnc.encMessage(jsonObject.toString());
+        log.info("请求明文："+jsonObject.toString());
+        reqInfo.setSignContent(signContent);
+        map.put("method",reqInfo.getMethod());
+        map.put("signContent",signContent);
+        String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
+
+        //解密后的响应明文
+        String resultData= encAndDnc.dencMessage(result);
+        log.info("响应明文结果"+resultData);
+        JSONObject jsonObject3=JSONObject.parseObject(resultData);
+        Assert.assertEquals(jsonObject3.get("orderStatus"),"PROCESSING");
 
     }
+
+
+    //一码多付查询
+    @Test(description = "一码多付查询")
+    public void OnePayQuery()throws Exception{
+        ReqInfo reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","一码多付查询");
+        JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
+        encAndDnc=new EncAndDnc();
+        //加密后的字符串
+        String signContent= encAndDnc.encMessage(jsonObject.toString());
+        log.info("请求明文："+jsonObject.toString());
+        reqInfo.setSignContent(signContent);
+        map.put("method",reqInfo.getMethod());
+        map.put("signContent",signContent);
+        String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
+
+        //解密后的响应明文
+        String resultData= encAndDnc.dencMessage(result);
+        log.info("响应明文："+resultData);
+        JSONObject jsonObject3=JSONObject.parseObject(resultData);
+        Assert.assertEquals(jsonObject3.get("orderStatus"),"PROCESSING");
+    }
+
 
 }

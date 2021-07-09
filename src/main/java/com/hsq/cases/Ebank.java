@@ -17,7 +17,7 @@ public class Ebank {
     ReqInfo reqInfo;
     EncAndDnc encAndDnc;
     Map map=TestConfig.getMap();
-    String transNo= TestConfig.dateString();
+    String transNo= TestConfig.transNo();
 
     @BeforeClass
     public void BeforePay(){

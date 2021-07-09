@@ -28,7 +28,7 @@ public class AgreePay {
     String uniqueCode=null;
     String agreePayNo=null;
     Map map=TestConfig.getMap();
-    String transNo=TestConfig.dateString();
+    String transNo=TestConfig.transNo();
     String transNo2=TestConfig.dateString()+"55";
 
     //协议支付
@@ -42,7 +42,7 @@ public class AgreePay {
         reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","协议支付预绑卡");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("requestDate", TestConfig.dateString());
-        jsonObject.put("transNo",TestConfig.dateString());
+        jsonObject.put("transNo",TestConfig.transNo());
         jsonObject.put("accNo","621082"+TestConfig.getRandom4(9)+"2");
         //加密后的字符串
         String signContent= encAndDnc.encMessage(jsonObject.toString());
@@ -237,7 +237,7 @@ public class AgreePay {
     public void AgreePayRefundMarketing(){
         reqInfo = TestConfig.sessionLocalhost.selectOne("com.hsq.selReqInfo","协议支付含营销户退款");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
-        jsonObject.put("transNo",TestConfig.dateString());
+        jsonObject.put("transNo",TestConfig.transNo());
         jsonObject.put("requestDate", TestConfig.dateString());
         jsonObject.put("origTransNo",transNo2);
 

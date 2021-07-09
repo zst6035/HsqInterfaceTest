@@ -15,5 +15,6 @@ public class SendMail {
        String [] emailsTo={"shouting_zhang@baofu.com","1148744992@qq.com"};
        TestConfig.sendMail(emailsTo,file);
         log.info("邮件发送成功");
+
     }
 }

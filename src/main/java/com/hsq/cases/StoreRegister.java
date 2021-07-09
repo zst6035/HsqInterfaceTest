@@ -25,7 +25,7 @@ public class StoreRegister {
 
  //   EncAndDnc encAndDnc=new EncAndDnc();
     Map map;
-   String transNo=TestConfig.dateString();
+   String transNo=TestConfig.transNo();
 
     @BeforeClass
     public void BeforePay(){
@@ -36,6 +36,11 @@ public class StoreRegister {
         map.put("format","json");
         map.put("signType","CFCA");
         map.put("sign",null);
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 
 
@@ -44,9 +49,11 @@ public class StoreRegister {
       ReqInfo  reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","门店个体工商户报备");
       JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","622848"+TestConfig.getRandom4(13));
-        jsonObject.put("transNo",TestConfig.dateString());
+        jsonObject.put("transNo",TestConfig.transNo());
         jsonObject.put("contactName",TestConfig.getChineseName(2));
         jsonObject.put("selfEmployed","2");
+        jsonObject.put("contactPhone","131"+TestConfig.getRandom4(8));
+        jsonObject.put("contactPhone","131"+TestConfig.getRandom4(8));
         jsonObject.put("contactPhone","131"+TestConfig.getRandom4(8));
         jsonObject.put("servicePhone","131"+TestConfig.getRandom4(8));
         log.info("请求明文："+jsonObject.toString());
@@ -80,13 +87,21 @@ public class StoreRegister {
         jsonObject.put("contactPhone","131"+TestConfig.getRandom4(8));
         jsonObject.put("servicePhone","131"+TestConfig.getRandom4(8));
         log.info("请求明文："+jsonObject.toString());
+
         //加密后的字符串
         EncAndDnc e7=new EncAndDnc();
         String signContent= e7.encMessage(jsonObject.toString());
         reqInfo.setSignContent(signContent);
         map.put("method",reqInfo.getMethod());
         map.put("signContent",signContent);
+        log.info("========={}",map);
         String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
+        log.info("========={}",result);
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         //返回数据转换为json
         // JSONObject jsonObject1=JSONObject.parseObject(result);
         //请求结果进行解密
@@ -104,11 +119,16 @@ public class StoreRegister {
         ReqInfo  reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","门店个人报备");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
         jsonObject.put("bankCardNo","622848"+TestConfig.getRandom4(13));
-        jsonObject.put("transNo",TestConfig.dateString());
+        jsonObject.put("transNo",TestConfig.transNo());
         jsonObject.put("name",TestConfig.getChineseName(2));
         jsonObject.put("bankPhone","131"+TestConfig.getRandom4(8));
         jsonObject.put("phone","131"+TestConfig.getRandom4(8));
         log.info("请求明文："+jsonObject.toString());
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         //加密后的字符串
         //这里不重新定义一个，会拿不到数据；所以就重新定义一个，有很多地方都有这毛病
         EncAndDnc e4=new EncAndDnc();
@@ -118,6 +138,7 @@ public class StoreRegister {
         map.put("signContent",signContent);
         String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
 
+        log.info("========={}",result);
 
         String res=e4.dencMessage(result);
         //再将请求结果转换为json格式
@@ -149,6 +170,27 @@ public void  RegisterResult()throws Exception{
     log.info("响应明文结果"+res);
 }
 
+    //门店特约商户配置
+    @Test(description = "门店特约商户配置")
+    public void  StoreWxConfig()throws Exception{
+        ReqInfo reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","门店特约商户配置");
+        JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
+      EncAndDnc  encAndDnc=new EncAndDnc();
+        //加密后的字符串
+        String signContent= encAndDnc.encMessage(jsonObject.toString());
+
+        reqInfo.setSignContent(signContent);
+        map.put("method",reqInfo.getMethod());
+        map.put("signContent",signContent);
+        //此处是字段是叫代理商，不叫商户号；
+        map.put("agentMerchantNo","883007563082");
+        map.remove("merchant");
+        log.info("请求明文："+map.toString());
+        String result=  TestConfig.HttpSend(reqInfo.getUrl(),map);
+        log.info("响应密文："+result);
+        JSONObject jsonObject1=JSONObject.parseObject(result);
+        Assert.assertEquals(jsonObject1.get("errorMsg"),"商户特约配置异常");
+    }
 
 
 
