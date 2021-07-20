@@ -15,6 +15,8 @@ public class test {
         int i=new Random().nextInt(10)+1;
         System.out.println(i);
       log.info("hello");
+      log.info("你好，哈哈");
+      log.info("账户");
     }
 
 

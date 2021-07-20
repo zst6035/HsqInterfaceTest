@@ -13,7 +13,7 @@ import java.util.Map;
 //老接口，进件门店+宝财通商户号
 
 @Slf4j
-public class MerchantRegister {
+public class OldStoreRegister {
 
 
     String name=TestConfig.getChineseName(1);
@@ -75,7 +75,8 @@ public class MerchantRegister {
         JSONObject jsonObject2= JSONObject.parseObject(res);
         log.info("响应明文结果"+res);
         //也就类似包含
-       Assert.assertNotNull(jsonObject2.get("applyStatus"),"AUDIT");
+        log.info("jsonObject2的值是======"+jsonObject2.toString());
+       Assert.assertEquals(jsonObject2.get("applyStatus"),"AUDIT");
         uniqueCode= (String) jsonObject2.get("uniqueCode");
     }
 

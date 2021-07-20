@@ -48,6 +48,7 @@ public class AgentRegister {
         jsonObject.put("bankCardNo","622848"+TestConfig.getRandom4(13));
         jsonObject.put("transNo",transNo);
         jsonObject.put("contactName",name);
+        jsonObject.put("email",TestConfig.getEmail(9,11));
         /*法人证件类型：1大陆身份证 2护照 3 港澳台 4台湾居民 5其他*/
         jsonObject.put("legalIdcardType","3");
         jsonObject.put("contactPhone","131"+TestConfig.getRandom4(8));

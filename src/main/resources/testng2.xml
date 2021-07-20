@@ -7,10 +7,26 @@
             <!--<package name ="com.hsq.cases" />-->
    <!--</packages>-->
         <classes>
-            <!--协议支付-->
+            <!--协议支付和网银-->
             <class name="com.hsq.cases.AgreePay"></class>
+            <class name="com.hsq.cases.Ebank"></class>
+            <!--宝财通账户交易-->
             <class name="com.hsq.cases.Balance"></class>
-            <!--<class name="com.huishouqian.test.Test02"></class>-->
+
+            <!--商户和门店注册-->
+            <class name="com.hsq.cases.AgentRegister"></class>
+            <class name="com.hsq.cases.StoreRegister"></class>
+
+            <!--宝财通开户-->
+            <class name="com.hsq.cases.OldStoreRegister"></class>
+
+            <!--聚合交易-->
+            <class name="com.hsq.cases.PolymerizePay"></class>
+
+            <!--代付-->
+            <class name="com.hsq.cases.TransferPay"></class>
+
+
         </classes>
     </test>
     <listeners>

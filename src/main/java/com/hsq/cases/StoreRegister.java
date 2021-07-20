@@ -76,7 +76,7 @@ public class StoreRegister {
     }
 
 
-    @Test(description = "门店企业报备" )
+    @Test(description = "门店企业报备")
     public void  CompanyRegister()throws Exception{
         ReqInfo  reqInfo = DatabaseUtil.getSqlSession1().selectOne("com.hsq.selReqInfo","门店企业报备");
         JSONObject jsonObject= JSONObject.parseObject(reqInfo.getSignContent());
@@ -86,7 +86,7 @@ public class StoreRegister {
         jsonObject.put("legalName",TestConfig.getChineseName(2));
         jsonObject.put("contactPhone","131"+TestConfig.getRandom4(8));
         jsonObject.put("servicePhone","131"+TestConfig.getRandom4(8));
-        log.info("请求明文："+jsonObject.toString());
+        log.info("门店企业报备请求明文："+jsonObject.toString());
 
         //加密后的字符串
         EncAndDnc e7=new EncAndDnc();
@@ -108,7 +108,7 @@ public class StoreRegister {
         String res=e7.dencMessage(result);
         //再将请求结果转换为json格式
         JSONObject jsonObject2= JSONObject.parseObject(res);
-        log.info("响应明文结果"+res);
+        log.info("门店企业报备响应明文结果"+res);
         Assert.assertEquals(jsonObject2.get("respMsg"),"受理成功");
 
     }

@@ -12,7 +12,7 @@ import java.io.IOException;
 public class SendMail {
     public static void main(String [] args)throws Exception {
        File file= TestConfig.orderByDate();
-       String [] emailsTo={"shouting_zhang@baofu.com","1148744992@qq.com"};
+       String [] emailsTo={"shouting_zhang@baofu.com","1148744992@qq.com","huabei@baofu.com"};
        TestConfig.sendMail(emailsTo,file);
         log.info("邮件发送成功");
 
